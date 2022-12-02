@@ -63,5 +63,6 @@ const users = [
 
 module.exports = {
   feed,
-  user: () => users2
+  user: () => users2,
+  users: () => users
 };

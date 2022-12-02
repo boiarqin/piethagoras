@@ -7,6 +7,7 @@ type Query {
     orderBy: LinkOrderByInput
   ): Feed!
   user: User!
+  users: [User!]!
 }
 
 type Feed {
@@ -41,6 +42,7 @@ type User {
   name: String!
   email: String!
   links: [Link!]!
+  orderCount: Int
 }
 
 type Link {

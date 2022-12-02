@@ -6,14 +6,20 @@ function links(parent, args, context) {
 
 const id = (parent) => parent.id
 const name = (parent) => {
-  console.log(parent)
   return parent.name
 }
 const email = (parent) => parent.email
+
+const orderCount = async (parent, args, context) => {
+  const count = await context.prisma.order.count({where: {userId: parent.id}});
+
+  return count
+}
 
 module.exports = {
   id,
   name,
   email,
-  links
+  links,
+  orderCount,
 };

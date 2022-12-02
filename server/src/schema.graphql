@@ -8,6 +8,7 @@ type Query {
   ): Feed!
   user: User!
   users: [User!]!
+  orders: [Order!]!
 }
 
 type Feed {
@@ -43,6 +44,14 @@ type User {
   email: String!
   links: [Link!]!
   orderCount: Int
+  orders: [Order!]!
+}
+
+type Order {
+  id: ID!
+  createdAt: DateTime!
+  email: String!
+  pizzasCount: Int
 }
 
 type Link {

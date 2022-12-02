@@ -30,7 +30,14 @@ async function users(parent, args, context, info) {
   return users  
 }
 
+async function orders(parent, args, context, info) {
+  const orders = await context.prisma.order.findMany({
+  });
+  return orders  
+}
+
 module.exports = {
   feed,
   users, 
+  orders,
 };

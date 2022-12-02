@@ -1,0 +1,89 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  name      String
+  createdAt DateTime  @default(now())
+  messages  Message[]
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  body   String
+  createdAt DateTime @default(now())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+enum PizzaSize {
+  SMALL
+  MEDIUM
+  LARGE
+  XLARGE
+}
+
+enum Crust {
+  ORIGINAL
+  DEEP_DISH
+  THIN_CRISPY
+  GLUTEN_FREE
+}
+
+enum Sauce {
+  MARINARA
+  ALFREDO
+  BBQ
+  BUFFALO
+  NONE
+}
+
+enum CheeseAmount {
+  REGULAR
+  LIGHT
+  HEAVY
+  NONE
+}
+
+enum Topping {
+  PEPPERONI
+  SAUSAGE
+  BACON
+  HAM
+  CHICKEN
+  MUSHROOM
+  ONION
+  PINEAPPLE
+  BLACK_OLIVE
+  GREEN_PEPPER
+  JALAPENO
+  TOMATO
+}
+
+model Pizza {
+  id        Int      @id @default(autoincrement())
+  name String?
+  size PizzaSize
+  crust Crust
+  sauce Sauce
+  cheeseAmount CheeseAmount
+  toppings Topping[]
+  order Order? @relation(fields: [orderId], references: [id])
+  orderId Int?
+}
+
+model Order {
+ id        Int      @id @default(autoincrement())
+ createdAt DateTime  @default(now())
+ pizzas Pizza[]
+ email String
+}

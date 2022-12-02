@@ -6,6 +6,7 @@ type Query {
     take: Int
     orderBy: LinkOrderByInput
   ): Feed!
+  user: User!
 }
 
 type Feed {

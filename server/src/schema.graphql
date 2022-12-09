@@ -18,8 +18,8 @@ type Mutation {
   login(email: String!, password: String!): AuthPayload
   vote(linkId: ID!): Vote
   placeOrder(input: OrderInput): Order
-  changeOrderStatus(id: Int, newStatus: String): Order
-  changePizzaStatus(id: Int, newStatus: String): Pizza
+  changeOrderStatus(id: ID!, newStatus: Int!): Order
+  changePizzaStatus(id: ID!, newStatus: Int!): Pizza
 }
 
 type Subscription {

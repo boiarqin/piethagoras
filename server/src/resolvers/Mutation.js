@@ -101,10 +101,42 @@ async function placeOrder(parent, args, context, info) {
   return newOrder;
 }
 
+async function changeOrderStatus(parent, args, context, info) {
+  const updateOrder = await context.prisma.order.update({
+    where: {
+      id: parseInt(args.id),
+    },
+    data: {
+      status: args.newStatus,
+    },
+  });
+
+  context.pubsub.publish("UPDATE_ORDER_STATUS", updateOrder);
+
+  return updateOrder;
+}
+
+async function changePizzaStatus(parent, args, context, info) {
+  const updatePizza = await context.prisma.pizza.update({
+    where: {
+      id: parseInt(args.id),
+    },
+    data: {
+      status: args.newStatus,
+    },
+  });
+
+  context.pubsub.publish("UPDATE_PIZZA_STATUS", updatePizza);
+
+  return updatePizza;
+}
+
 module.exports = {
   post,
   signup,
   login,
   vote,
   placeOrder,
+  changeOrderStatus,
+  changePizzaStatus,
 };

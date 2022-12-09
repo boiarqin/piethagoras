@@ -64,6 +64,7 @@ type Order {
   email: String!
   pizzasCount: Int
   pizzas: [Pizza!]!
+  status: Int
 }
 
 type Pizza {
@@ -75,6 +76,7 @@ type Pizza {
   cheeseAmount: String!
   toppings: String!
   orderId: Int!
+  status: Int
 }
 
 type Link {

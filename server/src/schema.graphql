@@ -1,11 +1,6 @@
 type Query {
   info: String!
-  feed(
-    filter: String
-    skip: Int
-    take: Int
-    orderBy: LinkOrderByInput
-  ): Feed!
+  feed(filter: String, skip: Int, take: Int, orderBy: LinkOrderByInput): Feed!
   user: User!
   users: [User!]!
   orders: [Order!]!
@@ -19,18 +14,20 @@ type Feed {
 
 type Mutation {
   post(url: String!, description: String!): Link!
-  signup(
-    email: String!
-    password: String!
-    name: String!
-  ): AuthPayload
+  signup(email: String!, password: String!, name: String!): AuthPayload
   login(email: String!, password: String!): AuthPayload
   vote(linkId: ID!): Vote
+  placeOrder(input: OrderInput): Order
+  changeOrderStatus(id: Int, newStatus: String): Order
+  changePizzaStatus(id: Int, newStatus: String): Pizza
 }
 
 type Subscription {
   newLink: Link
   newVote: Vote
+  newOrder: Order
+  updateOrderStatus: Order
+  updatePizzaStatus: Pizza
 }
 
 type AuthPayload {
@@ -47,11 +44,37 @@ type User {
   orders: [Order!]!
 }
 
+input OrderInput {
+  userId: String!
+  pizzas: [PizzaInput!]!
+}
+
+input PizzaInput {
+  name: String
+  size: String!
+  crust: String!
+  sauce: String!
+  cheeseAmount: String!
+  toppings: String
+}
+
 type Order {
   id: ID!
   createdAt: DateTime!
   email: String!
   pizzasCount: Int
+  pizzas: [Pizza!]!
+}
+
+type Pizza {
+  id: ID!
+  name: String!
+  size: String!
+  crust: String!
+  sauce: String!
+  cheeseAmount: String!
+  toppings: String!
+  orderId: Int!
 }
 
 type Link {

@@ -1,9 +1,8 @@
 import Head from 'next/head'
-import ContactHours from '../components/contact-hours';
 import Footer from '../components/footer'
-import StartYourOrder from '../components/start-your-order';
-import Header from '../components/header';
-import styles from '../styles/BlogPost.module.css';
+import HeaderSimple from '../components/header-simple';
+import ContactHours from '../components/contact-hours';
+// import styles from '../styles/BlogPost.module.css';
 
 const PurchaseFunnel = ({ children }) => {
     return (
@@ -13,7 +12,7 @@ const PurchaseFunnel = ({ children }) => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <Header />
+            <HeaderSimple />
 
             <main className="main">
                 {/* <article className={styles['blog-post']}>

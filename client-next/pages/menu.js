@@ -2,10 +2,10 @@ import BlogPost from "../layouts/blog-post";
 import { SIZES, SAUCE, CRUST, CHEESE_AMOUNT, TOPPINGS, FAVORITES } from "../constants/pizza-options";
 import styles from "../styles/pages/Menu.module.css";
 
-const BYOCategory = ({categoryName, categoryOptions}) => {
+const BYOCategory = ({ categoryName, categoryOptions }) => {
     return (
         <div className={`${styles['byo-category']} ${categoryName === 'Size' ? styles['byo-category-size'] : ''}`}>
-        <h3>{categoryName}</h3>
+            <h3>{categoryName}</h3>
             <ul>
                 {
                     Object.keys(categoryOptions).map((key) => {
@@ -51,22 +51,21 @@ const Post = () => {
             <h2>Build Your Own Pizza</h2>
             <p><em>Have it your way!</em></p>
             <div className={styles.byo}>
-            <div className={styles.wrapper}>
-                <div className={styles.left}>
-                <BYOCategory categoryName="Size" categoryOptions={SIZES} />
-            <BYOCategory categoryName="Crust Options" categoryOptions={CRUST} />
-            
-            <BYOCategory categoryName="Cheese Amount" categoryOptions={CHEESE_AMOUNT} />
-            <BYOCategory categoryName="Sauces" categoryOptions={SAUCE} />
-                </div>
-                <div className={styles.right}>
-                
-                <BYOCategory categoryName="Toppings" categoryOptions={TOPPINGS} />
+                <div className={styles.wrapper}>
+                    <div className={styles.left}>
+                        <BYOCategory categoryName="Size" categoryOptions={SIZES} />
+                        <BYOCategory categoryName="Crust Options" categoryOptions={CRUST} />
+                        <BYOCategory categoryName="Cheese Amount" categoryOptions={CHEESE_AMOUNT} />
+                        <BYOCategory categoryName="Sauces" categoryOptions={SAUCE} />
+                    </div>
+                    <div className={styles.right}>
+
+                        <BYOCategory categoryName="Toppings" categoryOptions={TOPPINGS} />
+                    </div>
                 </div>
             </div>
-            </div>
-            
-            
+
+
 
         </BlogPost>
     )

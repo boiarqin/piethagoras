@@ -1,0 +1,27 @@
+
+.promos .wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.promo-card {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  border: 1px solid #7D1D03;
+  box-shadow: rgb(0 0 0 / 75%) 0px 0px 0.25rem 0px;
+  background-color: #F8EFD9;
+}
+
+.promo-card h3 {
+  margin: .5rem;
+}
+
+.promo-card img {
+  width: 100%;
+}
+
+.promo-card p {
+  margin: .5rem;
+}

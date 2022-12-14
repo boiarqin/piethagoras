@@ -1,5 +1,5 @@
-import sectionStyles from '../styles/Sections.module.css'
-import footerStyles from '../styles/Footer.module.css'
+import sectionStyles from '../styles/components/Sections.module.css'
+import footerStyles from '../styles/components/Footer.module.css'
 
 const Footer = () => {
     return (

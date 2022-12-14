@@ -6,8 +6,8 @@ import Careers from '../components/careers';
 import Footer from '../components/footer'
 import StartYourOrder from '../components/start-your-order';
 import Header from '../components/header';
-import styles from '../styles/Home.module.css';
-import sectionStyles from '../styles/Sections.module.css';
+import styles from '../styles/pages/Home.module.css';
+import sectionStyles from '../styles/components/Sections.module.css';
 
 export default function Home() {
   return (

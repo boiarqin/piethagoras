@@ -1,5 +1,5 @@
-import sectionStyles from '../styles/Sections.module.css'
-import startYourOrderStyles from '../styles/StartYourOrder.module.css'
+import sectionStyles from '../styles/components/Sections.module.css'
+import startYourOrderStyles from '../styles/components/StartYourOrder.module.css'
 
 const StartYourOrder = () => {
     return (

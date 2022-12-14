@@ -1,4 +1,4 @@
-const SIZES = {
+export const SIZES = {
     'SMALL':
     {
         displayName: 'Small',
@@ -23,7 +23,7 @@ const SIZES = {
     }
 }
 
-const CRUST = {
+export const CRUST = {
     ORIGINAL: {
         displayName: 'Original',
         description: 'Our house favorite, brushed with garlic butter -- you can\'t go wrong!',
@@ -46,7 +46,7 @@ const CRUST = {
     }
 }
 
-const SAUCE = {
+export const SAUCE = {
     MARINARA: {
         displayName: 'Marinara',
         description: 'Hearty red sauce, made with San Marzano tomatoes and fresh Italian herbs',
@@ -59,7 +59,7 @@ const SAUCE = {
     },
     BBQ: {
         displayName: 'BBQ',
-        description: 'Tangy mesquite barbecue sauce, perfect with grilled meats and veggies'
+        description: 'Tangy mesquite barbecue sauce, perfect with grilled meats and veggies',
         key: 'BBQ'
     },
     BUFFALO: {
@@ -74,7 +74,7 @@ const SAUCE = {
     }
 }
 
-const CHEESE_AMOUNT = {
+export const CHEESE_AMOUNT = {
     REGULAR: {
         displayName: 'Regular',
         description: 'Not too much, not too little -- juuuuust right',
@@ -97,7 +97,7 @@ const CHEESE_AMOUNT = {
     }
 }
 
-const TOPPINGS = {
+export const TOPPINGS = {
     PEPPERONI: {
         displayName: 'Pepperoni',
         description: 'Thin slices of spicy red pepperoni',
@@ -160,6 +160,75 @@ const TOPPINGS = {
     },
 }
 
-const FAVORITES = [
-
+export const FAVORITES = [
+    {
+        displayName: 'Piethagoras Feast',
+        description: 'A classic you can\'t go wrong with! A balance of meats and veggies',
+        crust: CRUST.ORIGINAL,
+        sauce: SAUCE.MARINARA,
+        toppings: [TOPPINGS.PEPPERONI, TOPPINGS.SAUSAGE, TOPPINGS.HAM, TOPPINGS.GREEN_PEPPER, TOPPINGS.BLACK_OLIVE, TOPPINGS.ONION]
+    },
+    {
+        displayName: 'Tuscan Garden',
+        description: 'Fresh slices of tomato on creamy alfredo',
+        crust: CRUST.THIN_CRISPY,
+        sauce: SAUCE.ALFREDO,
+        toppings: [TOPPINGS.TOMATO, TOPPINGS.BLACK_OLIVE, TOPPINGS.GREEN_PEPPER, TOPPINGS.ONION]
+    },
+    {
+        displayName: 'Pepperoni Lovers',
+        description: 'Comes with 2x the amount of our spicy, hand-cut pepperoni',
+        crust: CRUST.ORIGINAL,
+        sauce: SAUCE.MARINARA,
+        toppings: [TOPPINGS.PEPPERONI]
+    },
+    {
+        displayName: 'Mushroom Lovers',
+        description: 'Comes with 2x the amount of our savory, hand-sliced shrooms',
+        crust: CRUST.ORIGINAL,
+        sauce: SAUCE.ALFREDO,
+        toppings: [TOPPINGS.MUSHROOM]
+    },
+    {
+        displayName: 'Sicilian Monster',
+        description: 'All the meats! You\'re gonna need a nap after this one',
+        crust: CRUST.DEEP_DISH,
+        sauce: SAUCE.MARINARA,
+        toppings: [TOPPINGS.PEPPERONI, TOPPINGS.SAUSAGE, TOPPINGS.HAM, TOPPINGS.CHICKEN, TOPPINGS.BACON]
+    },
+    {
+        displayName: 'The Bushwhacker',
+        description: 'All the veggies! You\'re gonna need a nap after this one',
+        crust: CRUST.DEEP_DISH,
+        sauce: SAUCE.MARINARA,
+        toppings: [TOPPINGS.TOMATO, TOPPINGS.MUSHROOM, TOPPINGS.GREEN_PEPPER, TOPPINGS.BLACK_OLIVE, TOPPINGS.ONION]
+    },
+    {
+        displayName: 'Bianca',
+        description: 'Our delicious fennel-studded sausage and green peppers on creamy alfredo',
+        crust: CRUST.ORIGINAL,
+        sauce: SAUCE.ALFREDO,
+        toppings: [TOPPINGS.SAUSAGE, TOPPINGS.GREEN_PEPPER]
+    },
+    {
+        displayName: 'Hang Ten Piggy',
+        description: 'Made with the finest surfing porkers',
+        crust: CRUST.THIN_CRISPY,
+        sauce: SAUCE.BBQ,
+        toppings: [TOPPINGS.HAM, TOPPINGS.PINEAPPLE]
+    },
+    {
+        displayName: 'Memphis Smokeshow',
+        description: 'Pairs well with country music and cold beer',
+        crust: CRUST.ORIGINAL,
+        sauce: SAUCE.BBQ,
+        toppings: [TOPPINGS.CHICKEN, TOPPINGS.BACON, TOPPINGS.JALAPENO, TOPPINGS.ONION]
+    },
+    {
+        displayName: 'The Afterburner',
+        description: 'Not for the faint of heart!',
+        crust: CRUST.THIN_CRISPY,
+        sauce: SAUCE.BUFFALO,
+        toppings: [TOPPINGS.CHICKEN, TOPPINGS.JALAPENO, TOPPINGS.ONION]
+    }
 ]

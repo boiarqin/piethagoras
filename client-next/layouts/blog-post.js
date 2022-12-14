@@ -4,7 +4,7 @@ import Careers from '../components/careers';
 import Footer from '../components/footer'
 import StartYourOrder from '../components/start-your-order';
 import Header from '../components/header';
-import styles from '../styles/BlogPost.module.css';
+import styles from '../styles/layouts/BlogPost.module.css';
 
 const BlogPost = ({ children }) => {
     return (

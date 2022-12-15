@@ -3,9 +3,9 @@ import {DELIVERY_MODE, CARRYOUT_MODE} from '../../constants/pizza-options'
 
 const initialState = {
     mode: DELIVERY_MODE,
-  items: [],
-  name: '',
-  email: ''
+    items: [],
+    name: '',
+    email: ''
 }
 
 export const cartSlice = createSlice({
@@ -18,6 +18,25 @@ export const cartSlice = createSlice({
     setCarryoutMode: (state) => {
         state.mode = CARRYOUT_MODE
     },
+    addItemToCart: (state, action) => {
+        const newItem = action.payload
+        newItem.id = state.items.length;
+        state.items.push(newItem)
+    },
+    removeItemFromCart: (state, action) => {
+        const itemId = action.payload
+        const index = state.items.findIndex(item => item.id = itemId);
+        
+        if (index > -1){
+            state.items.splice(index, 1)
+        }  
+    },
+    addCheckoutInfo: (state, action) => {
+        const { name, email } = action.payload;
+
+        state.name = name;
+        state.email = email
+    }
     // increment: (state) => {
     //   // Redux Toolkit allows us to write "mutating" logic in reducers. It
     //   // doesn't actually mutate the state because it uses the Immer library,
@@ -35,6 +54,6 @@ export const cartSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { setDeliveryMode, setCarryoutMode, } = cartSlice.actions
+export const { setDeliveryMode, setCarryoutMode, addItemToCart, removeItemFromCart, addCheckoutInfo } = cartSlice.actions
 
 export default cartSlice.reducer

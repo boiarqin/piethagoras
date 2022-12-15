@@ -27,10 +27,10 @@ const ContactHours = () => {
                     Fri:	5:00 PM - 10:00 PM
                   </li>
                   <li>
-                    Sat:	4:00 PM – 10:00 PM
+                    Sat:	4:00 PM - 10:00 PM
                   </li>
                   <li>
-                    Sun:	4:00 PM – 10:00 PM
+                    Sun:	4:00 PM - 10:00 PM
                   </li>
                 </ul>
               </div>

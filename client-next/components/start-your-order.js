@@ -12,11 +12,11 @@ const StartYourOrder = () => {
             <h2>🍕 Start Your Order</h2>
             <div className={startYourOrderStyles.options}>
             <Link passHref href="/new-order">
-              <button onClick={() => dispatch(setDeliveryMode())}>DELIVERY</button>
+              <button className="primary" onClick={() => dispatch(setDeliveryMode())}>DELIVERY</button>
             </Link>
             <span>or</span>
             <Link passHref href="/new-order">
-            <button onClick={() => dispatch(setCarryoutMode())}>CARRY OUT</button>
+            <button className="primary" onClick={() => dispatch(setCarryoutMode())}>CARRY OUT</button>
             </Link>
             </div>
           </div>

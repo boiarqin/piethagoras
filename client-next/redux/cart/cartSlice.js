@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import {DELIVERY_MODE, CARRYOUT_MODE} from '../../constants/pizza-options'
+import { v4 as uuidv4 } from 'uuid';
 
 const initialState = {
     mode: DELIVERY_MODE,
@@ -19,8 +20,10 @@ export const cartSlice = createSlice({
         state.mode = CARRYOUT_MODE
     },
     addItemToCart: (state, action) => {
-        const newItem = action.payload
-        newItem.id = state.items.length;
+        const newItem = {
+            ...action.payload,
+        id: uuidv4()
+        };
         state.items.push(newItem)
     },
     removeItemFromCart: (state, action) => {

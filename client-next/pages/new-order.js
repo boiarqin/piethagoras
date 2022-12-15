@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import PurchaseFunnel from "../layouts/purchase-funnel";
 import { SIZES, SAUCE, CRUST, CHEESE_AMOUNT, TOPPINGS, FAVORITES, DELIVERY_MODE, CARRYOUT_MODE } from "../constants/pizza-options";
-import { setDeliveryMode, setCarryoutMode, addItemToCart } from '../redux/cart/cartSlice';
+import { setDeliveryMode, setCarryoutMode, addItemToCart, removeItemFromCart } from '../redux/cart/cartSlice';
 import styles from '../styles/pages/NewOrder.module.css';
 
 const NewOrder = () => {
@@ -16,11 +16,12 @@ const NewOrder = () => {
           <h2>Your Items</h2>
           <div>
             Mode: {mode}
-            { mode === DELIVERY_MODE ? (
-              <button onClick={() => dispatch(setCarryoutMode())}>Switch to Carryout</button>
+            {' '}{ mode === DELIVERY_MODE ? (
+              <button className="text" onClick={() => dispatch(setCarryoutMode())}>(Switch to Carryout)</button>
             ) : (
-              <button onClick={() => dispatch(setDeliveryMode())}>Switch to Delivery</button>
+              <button className="text" onClick={() => dispatch(setDeliveryMode())}>(Switch to Delivery)</button>
             )}
+            
             
           </div>
           <div>
@@ -30,13 +31,13 @@ const NewOrder = () => {
               <ul className={styles.items}>
                 {items.map(item => {
                   return (
-                    <li>{item.displayName}</li>
+                    <li key={item.id}>{item.displayName} <button className="text" onClick={() => dispatch(removeItemFromCart(item.id))}>(remove)</button></li>
                   )
                 })}
               </ul>
             )}
           </div>
-          <button className={styles.checkout}>Checkout</button>
+          <button className={`primary {styles.checkout}`}>Checkout</button>
         </div>
 
         <div className={styles.menu}>

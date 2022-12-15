@@ -70,12 +70,25 @@ body {
           
 }
 
-button {
+button.primary {
   padding: 0.5rem 1rem;
   background-color: #7EA92C;
   border-color: #618222;
   color: white;
   text-transform: uppercase;
+  border-radius: 8px;
+  cursor:pointer;
+}
+
+button.text {
+  display: inline;
+  padding: 0;
+  background-color: transparent;
+  border-width: 0;
+  border-color: none;
+  color: #7EA92C;
+  text-decoration: underline;
+  text-transform: none;
   border-radius: 8px;
   cursor:pointer;
 }

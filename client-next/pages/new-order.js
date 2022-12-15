@@ -13,13 +13,13 @@ const NewOrder = () => {
             Switch Delivery/Carryout mode
           </div>
           <div>
-            <ul>
+            <ul className={styles.items}>
                 <li>Selected item x 1</li>
                 <li>Selected item x 1</li>
 
             </ul>
           </div>
-          <button>Place Order</button>
+          <button className={styles.checkout}>Checkout</button>
         </div>
 
         <div className={styles.menu}>

@@ -11,7 +11,17 @@
     order: 1;
     flex-shrink: 0;
     width: 30%;
-    border: 1px solid black;
+    padding: 0 1rem 1rem;
+    border-left: 2px solid #7D1D03;
+    /* background-color: #FBBF58; */
+}
+
+.cart .items {
+    padding: 0 1rem
+}
+
+.cart .checkout {
+    width: 100%;
 }
 
 .menu-cart-container .menu {

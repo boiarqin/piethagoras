@@ -9,7 +9,7 @@ import Header from '../components/header';
 import styles from '../styles/pages/Home.module.css';
 import sectionStyles from '../styles/components/Sections.module.css';
 
-export default function Home() {
+export default function Home({ allPostsData }) {
   return (
     <div className="container">
       <Head>
@@ -17,69 +17,62 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header/>
+      <Header />
 
       <main className="main">
         <section className={`${sectionStyles.section} ${sectionStyles.fiftyFifty} ${sectionStyles['section-mozz']}`}>
           <div className={sectionStyles.interior}>
-          <div className={sectionStyles.wrapper}>
+            <div className={sectionStyles.wrapper}>
               <div className={sectionStyles.left}>
-            <h1 className={styles.title}>
-              Welcome to Piethagoras Pizza Shop!
-            </h1>
-            <p>Pizza ipsum dolor amet peppers meatball chicken steak. Meat lovers extra sauce bbq, sauteed onions broccoli spinach peppers ham mayo philly chicken Chicago style chicken hand tossed string cheese pineapple. Hand tossed chicken Chicago style, philly steak deep crust pepperoni sausage green bell peppers. Stuffed NY style ham, steak white garlic pork sausage. Sauteed onions buffalo sauce mushrooms marinara pork peppers NY style thin crust extra cheese.</p>
-            </div>
-            
-            <div className={sectionStyles.right}>
-            <Image
+                <h1 className={styles.title}>
+                  Welcome to Piethagoras Pizza Shop!
+                </h1>
+                <p>Pizza ipsum dolor amet peppers meatball chicken steak. Meat lovers extra sauce bbq, sauteed onions broccoli spinach peppers ham mayo philly chicken Chicago style chicken hand tossed string cheese pineapple. Hand tossed chicken Chicago style, philly steak deep crust pepperoni sausage green bell peppers. Stuffed NY style ham, steak white garlic pork sausage. Sauteed onions buffalo sauce mushrooms marinara pork peppers NY style thin crust extra cheese.</p>
+              </div>
+
+              <div className={sectionStyles.right}>
+                <Image
                   src="/images/home-title.jpg"
                   height={200}
                   width={300}
                   alt="Pizza with a slice cut out"
                 />
 
+              </div>
             </div>
-          </div>
           </div>
         </section>
 
-        <StartYourOrder/>
+        <StartYourOrder />
 
         <section className={`${sectionStyles.section} ${styles.promos} ${sectionStyles['section-dough']}`}>
           <div className={sectionStyles.interior}>
             <h2>📰 News and Promotions</h2>
             <div className={styles.wrapper}>
-              
-                <Link href="/promotions/national-pizza-day" className={styles['promo-card']}>
-                  <Image
-                    src="/images/home-promo-1.jpg" // Route of the image file
-                    height={150} // Desired size with correct aspect ratio
-                    width={200} // Desired size with correct aspect ratio
-                    alt="Pepperoni pizza"
-                  />
-                  <h3>Happy National Pizza Day! Get 20% off your order</h3>
-                  <p>Tempor in minim quis. Garlic sauce green bell peppers string cheese ea, meatball pariatur proident ad chicken wing extra sauce ut platter occaecat excepteur labore.</p>
-                </Link>
-                <Link href="/promotions/5-year-anniversary" className={styles['promo-card']}>
-                  <Image
-                    src="/images/home-promo-2.jpg" // Route of the image file
-                    height={150} // Desired size with correct aspect ratio
-                    width={200} // Desired size with correct aspect ratio
-                    alt="Margherita pizza"
-                  />
-                  <h3>Piethagoras celebrates our 5-year anniversary</h3>
-                  <p>Magna dolore consequat deserunt. Pan pizza roll in, melted cheese veniam ullamco philly chicken adipisicing enim elit meatball parmesan white pizza aliqua.</p>
-                </Link>
-                <Link href="/promotions/pi-day" className={styles['promo-card']}>
-                  <Image
-                    src="/images/home-promo-3.jpg" // Route of the image file
-                    height={150} // Desired size with correct aspect ratio
-                    width={200} // Desired size with correct aspect ratio
-                    alt="3 takeout boxes of pizza"
-                  />
-                  <h3>Happy PI Day! Buy 2 medium pizzas get 1 free</h3>
-                  <p>Cupidatat hawaiian in ad minim. Chicken wing aliqua anim melted cheese, pan philly chicken culpa thin crust et string cheese bacon exercitation deserunt.</p>
-                </Link>
+              {allPostsData.map((post) => {
+                const {
+                  slug,
+                  imageSrc,
+                  imageAltText,
+                  title,
+                  snippet
+                } = post;
+
+                return (
+                  <Link key={slug} href={`/promotions/${slug}`} className={styles['promo-card']}>
+                    <Image
+                      src={imageSrc} // Route of the image file
+                      height={150} // Desired size with correct aspect ratio
+                      width={200} // Desired size with correct aspect ratio
+                      alt={imageAltText}
+                    />
+                    <h3>{title}</h3>
+                    <p>{snippet}</p>
+                  </Link>)
+              }
+
+              )}
+
             </div>
           </div>
         </section>
@@ -92,13 +85,26 @@ export default function Home() {
           </div>
         </section>
 
-        <Careers/>
+        <Careers />
 
-        <ContactHours/>
+        <ContactHours />
 
       </main>
 
-      <Footer/>
+      <Footer />
     </div>
   )
+}
+
+export async function getServerSideProps(context) {
+
+  const {data: allPostsData} = await fetch('http://localhost:3000/api/cms/posts', { method: 'GET' })
+    .then((response) => response.json())
+
+  return {
+    props: {
+      // props for your component
+      allPostsData,
+    },
+  };
 }

@@ -1,3 +1,6 @@
+export const DELIVERY_MODE = 'DELIVERY';
+export const CARRYOUT_MODE = 'CARRYOUT';
+
 export const SIZES = {
     'SMALL':
     {

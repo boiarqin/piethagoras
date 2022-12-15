@@ -1,8 +1,13 @@
+import { useDispatch, useSelector } from "react-redux";
 import PurchaseFunnel from "../layouts/purchase-funnel";
-import { SIZES, SAUCE, CRUST, CHEESE_AMOUNT, TOPPINGS, FAVORITES } from "../constants/pizza-options";
+import { SIZES, SAUCE, CRUST, CHEESE_AMOUNT, TOPPINGS, FAVORITES, DELIVERY_MODE, CARRYOUT_MODE } from "../constants/pizza-options";
 import styles from '../styles/pages/NewOrder.module.css';
+import { setDeliveryMode, setCarryoutMode } from '../redux/cart/cartSlice';
 
 const NewOrder = () => {
+  const dispatch = useDispatch();
+  const { mode, items } = useSelector((state) => state.cart)
+
   return (
     <PurchaseFunnel>
       <h1>Order Now</h1>
@@ -10,14 +15,23 @@ const NewOrder = () => {
         <div className={styles.cart}>
           <h2>Your Items</h2>
           <div>
-            Switch Delivery/Carryout mode
+            Mode: {mode}
+            { mode === DELIVERY_MODE ? (
+              <button onClick={() => dispatch(setCarryoutMode())}>Swich to Carryout</button>
+            ) : (
+              <button onClick={() => dispatch(setDeliveryMode())}>Switch to Delivery</button>
+            )}
+            
           </div>
           <div>
-            <ul className={styles.items}>
+            {items.length === 0 ? (
+              <span>No items in your cart</span>
+            ) : (
+              <ul className={styles.items}>
                 <li>Selected item x 1</li>
                 <li>Selected item x 1</li>
-
-            </ul>
+              </ul>
+            )}
           </div>
           <button className={styles.checkout}>Checkout</button>
         </div>

@@ -20,6 +20,7 @@ export const cartSlice = createSlice({
         state.mode = CARRYOUT_MODE
     },
     addItemToCart: (state, action) => {
+        console.log(action.payload)
         const newItem = {
             ...action.payload,
         id: uuidv4()

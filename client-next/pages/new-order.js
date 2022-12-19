@@ -87,7 +87,7 @@ const NewOrder = () => {
             )}
           </div>
           <Link passHref href="/checkout">
-            <button className={`primary {styles.checkout}`}>Checkout</button>
+            <button className={`primary {styles.checkout}`}>Go To Checkout</button>
           </Link>
         </div>
 

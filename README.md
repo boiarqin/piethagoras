@@ -1,36 +1,30 @@
-# React & Apollo Tutorial
+# Piethagoras Pizza Shop
+A playground application to demonstrate integration of various tools. Project currently demonstrates:
+- /server GraphQL implementation of pizza ordering and updates. (GraphQL/Prisma/Apollo)
+- /client-next FE pizza shop website (NextJS/Redux Toolkit (RTK))
 
-This is the sample project that belongs to the [React & Apollo Tutorial](https://www.howtographql.com/react-apollo/0-introduction/) on How to GraphQL.
+NextJS features used:
+    - Link, Router, Server-side rendering, API request/response, CSS Modules
 
-## How to use
+TBD: Formik, RTK Query
 
-### 1. Clone repository
-
-```sh
-git clone https://github.com/howtographql/react-apollo/
-```
-
-
-### 2. Start the backend server
-
-Go to the `server` folder, install dependencies and start the server. 
+# To run:
+1. Go to the `server` folder, install dependencies and start the server. 
 
 ```sh
-cd react-apollo/server
-yarn install
-yarn dev
+cd ./server
+npm install
+npm run dev
 ```
-
 > **Note**: If you want to interact with the GraphQL API of the server inside a [GraphQL Playground](https://github.com/prisma/graphql-playground), you can navigate to [http://localhost:4000](http://localhost:4000).
 
 
-### 3. Run the app
-
-Now that the server is running, you can start the React app as well. The commands need to be run in a new terminal tab/window inside the root directory `react-apollo` (because the current tab is blocked by the process running the server):
+2. Go to the `client-next` folder, install dependencies and start the server. 
 
 ```sh
-yarn install
-yarn start
+cd ./client-next
+npm install
+npm run dev
 ```
 
 You can now open your browser and use the app on [http://localhost:3000](http://localhost:3000).

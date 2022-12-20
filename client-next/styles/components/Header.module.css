@@ -12,6 +12,10 @@
     background-color: #7EA92C;
     box-shadow: rgb(0 0 0 / 75%) 0px 0px 0.8125rem 0px;
   }
+
+  .header.kitchen {
+    background-color: #7D1D03;
+  }
   
   .header nav {
     width: 100%;

@@ -1,12 +1,13 @@
 import Link from 'next/link';
 import { useDispatch, useSelector } from "react-redux";
+import clsx from "clsx"
 import styles from '../styles/components/Header.module.css'
 
-const Header = () => {
+const Header = ({isKitchen}) => {
   const {items} = useSelector((state) => state.cart)
 
     return (
-        <header className={styles.header}>
+        <header className={clsx(styles.header, {[styles.kitchen]: isKitchen})}>
         <nav >
           <ul>
             <li><Link href="/"><span className={styles.piLogo}>𝜋</span></Link></li>

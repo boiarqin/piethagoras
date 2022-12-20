@@ -1,27 +1,25 @@
 import Head from 'next/head'
 import Footer from '../components/footer'
-import HeaderSimple from '../components/header-simple';
-import ContactHours from '../components/contact-hours';
+import Header from '../components/header';
+// import styles from '../styles/layouts/BackOfHouse.module.css';
 
-const PurchaseFunnel = ({ children }) => {
+const BackOfHouse = ({ children }) => {
     return (
         <div className="container">
             <Head>
-                <title>Piethagoras Pizza | Order Online</title>
+                <title>Piethagoras Pizza | Back of House</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <HeaderSimple />
+            <Header isKitchen />
 
             <main className="main">
                 {children}
             </main>
-
-            <ContactHours />
 
             <Footer />
         </div>
     )
 }
 
-export default PurchaseFunnel;
+export default BackOfHouse;

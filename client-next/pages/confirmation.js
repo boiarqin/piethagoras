@@ -7,11 +7,14 @@ import PurchaseFunnel from "../layouts/purchase-funnel";
 import { SIZES, SAUCE, CRUST, CHEESE_AMOUNT, TOPPINGS, FAVORITES, DELIVERY_MODE, CARRYOUT_MODE } from "../constants/pizza-options";
 import { addCheckoutInfo, clearCartAndCheckout, completeCheckout } from '../redux/cart/cartSlice';
 import styles from '../styles/pages/NewOrder.module.css';
+import OrderSummary from '../components/order-summary';
 
 
 const Confirmation = ({orderInfo}) => {
     const dispatch = useDispatch();
     const router = useRouter();
+
+    const {mode, items} = orderInfo
     // router.query.id
     // const { mode, items } = useSelector((state) => state.cart)
 
@@ -32,6 +35,7 @@ const Confirmation = ({orderInfo}) => {
             <h1>Thank you for your order!</h1>
             <h2>Order Status Tracker</h2>
             <h2>Order Details</h2>
+            <OrderSummary mode={mode} items={items}/>
             {/* <div className={styles['menu-cart-container']}>
                 <div className={styles.cart}></div>
             </div>

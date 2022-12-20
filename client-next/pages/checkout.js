@@ -6,6 +6,7 @@ import Modal from 'react-modal';
 import PurchaseFunnel from "../layouts/purchase-funnel";
 import { SIZES, SAUCE, CRUST, CHEESE_AMOUNT, TOPPINGS, FAVORITES, DELIVERY_MODE, CARRYOUT_MODE } from "../constants/pizza-options";
 import { addCheckoutInfo, clearCartAndCheckout, completeCheckout } from '../redux/cart/cartSlice';
+import OrderSummary from '../components/order-summary';
 import styles from '../styles/pages/NewOrder.module.css';
 
 
@@ -30,7 +31,9 @@ const Checkout = () => {
         <PurchaseFunnel>
             <h1>Checkout</h1>
             <div className={styles['menu-cart-container']}>
-                <div className={styles.cart}></div>
+                <div className={styles.cart}>
+                    <OrderSummary items={items}/>
+                </div>
             </div>
 
             <div><strong>Name: </strong> Hank McPizzaLover</div>

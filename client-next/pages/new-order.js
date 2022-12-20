@@ -5,6 +5,7 @@ import Modal from 'react-modal';
 import PurchaseFunnel from "../layouts/purchase-funnel";
 import { SIZES, SAUCE, CRUST, CHEESE_AMOUNT, TOPPINGS, FAVORITES, DELIVERY_MODE, CARRYOUT_MODE } from "../constants/pizza-options";
 import { setDeliveryMode, setCarryoutMode, addItemToCart, removeItemFromCart } from '../redux/cart/cartSlice';
+import OrderSummary from '../components/order-summary';
 import styles from '../styles/pages/NewOrder.module.css';
 
 
@@ -53,39 +54,8 @@ const NewOrder = () => {
             ) : (
               <button className="text" onClick={() => dispatch(setDeliveryMode())}>(Switch to Delivery)</button>
             )}
-
-
           </div>
-          <div>
-            {items.length === 0 ? (
-              <span>No items in your cart -- Add some 'za!</span>
-            ) : (
-              <ul className={styles.items}>
-                {items.map(item => {
-                  const {
-                    id,
-                    displayName,
-                    size,
-                    crust,
-                    sauce,
-                    cheeseAmount,
-                    toppings
-                  } = item;
-
-                  return (
-                    <li key={id}>
-                      {displayName} <button className="text" onClick={() => dispatch(removeItemFromCart(id))}>(remove)</button>
-                      <p><strong>Size:</strong> {SIZES[size].displayName}</p>
-                      <p><strong>Crust:</strong> {CRUST[crust].displayName}</p>
-            <p><strong>Sauce:</strong> {SAUCE[sauce].displayName}</p>
-            <p><strong>Cheese Amount:</strong> {CHEESE_AMOUNT[cheeseAmount].displayName}</p>
-            <p><strong>Toppings:</strong> {toppings.map((topping) => TOPPINGS[topping].displayName).join(', ')}</p>
-                    </li>
-                  )
-                })}
-              </ul>
-            )}
-          </div>
+          <OrderSummary items={items} />
           <Link passHref href="/checkout">
             <button className={`primary {styles.checkout}`}>Go To Checkout</button>
           </Link>

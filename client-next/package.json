@@ -6,6 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@apollo/client": "^3.7.2",
     "@reduxjs/toolkit": "^1.9.1",
     "next": "latest",
     "react": "18.2.0",

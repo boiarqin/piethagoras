@@ -27,10 +27,10 @@ const OrderSummary = ({ mode, items }) => {
                 <li key={id}>
                   {displayName} <button className="text" onClick={() => dispatch(removeItemFromCart(id))}>(remove)</button>
                   <p><strong>Size:</strong> {SIZES[size].displayName}</p>
-                  <p><strong>Crust:</strong> {CRUST[crust].displayName}</p>
+                  <p><strong>Crust:</strong> {CRUST[crust]?.displayName}</p>
                   <p><strong>Sauce:</strong> {SAUCE[sauce].displayName}</p>
-                  <p><strong>Cheese Amount:</strong> {CHEESE_AMOUNT[cheeseAmount].displayName}</p>
-                  <p><strong>Toppings:</strong> {toppings.map((topping) => TOPPINGS[topping].displayName).join(', ')}</p>
+                  <p><strong>Cheese Amount:</strong> {CHEESE_AMOUNT[cheeseAmount]?.displayName}</p>
+                  <p><strong>Toppings:</strong> {toppings.map((topping) => TOPPINGS[topping]?.displayName).join(', ')}</p>
                 </li>
               )
             })}

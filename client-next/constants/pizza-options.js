@@ -37,6 +37,11 @@ export const CRUST = {
         description: 'Our famous, scrumptious, burnt cheese crust! You\'ll need a nap after',
         key: 'DEEP_DISH'
     },
+    THICC: {
+        displayName: 'THICC',
+        description: 'Hella Thicc with 2 C\'s: Crispy Cheese',
+        key: 'THICC'
+    },
     THIN_CRISPY: {
         displayName: 'Thin & Crispy',
         description: 'Crunchy edges, tavern style -- perfect for snacking',

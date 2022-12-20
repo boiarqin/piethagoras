@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from "react-redux";
+import { useQuery, gql } from '@apollo/client';
 import Modal from 'react-modal';
 import PurchaseFunnel from "../layouts/purchase-funnel";
 import { SIZES, SAUCE, CRUST, CHEESE_AMOUNT, TOPPINGS, FAVORITES, DELIVERY_MODE, CARRYOUT_MODE } from "../constants/pizza-options";
@@ -9,12 +10,47 @@ import { addCheckoutInfo, clearCartAndCheckout, completeCheckout } from '../redu
 import styles from '../styles/pages/NewOrder.module.css';
 import OrderSummary from '../components/order-summary';
 
+const ORDER_QUERY = (id) => gql`
+{
+    order(id: "${id}") {
+        id,
+        createdAt,
+        email,
+        pizzasCount,
+        status,
+        pizzas {
+            id,
+            size,
+            sauce,
+            cheeseAmount,
+            crust,
+            toppings
+        }
+    }
+}
+`
 
 const Confirmation = ({orderInfo}) => {
     const dispatch = useDispatch();
     const router = useRouter();
+    // const {
+    //     query
+    // }
 
-    const {mode, items} = orderInfo
+    const {mode} = orderInfo
+    let items = []
+
+    const {data} = useQuery(ORDER_QUERY(router.query.id));
+    console.log(data)
+
+    items = data?.order.pizzas.map( pizza => {
+        return {
+            ...pizza,
+            toppings: pizza.toppings.split(',')
+        }
+    }) || [];
+
+
     // router.query.id
     // const { mode, items } = useSelector((state) => state.cart)
 

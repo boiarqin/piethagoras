@@ -1,12 +1,22 @@
 import { useDispatch } from "react-redux";
-import { SIZES, SAUCE, CRUST, CHEESE_AMOUNT, TOPPINGS } from "../constants/pizza-options";
+import { SIZES, SAUCE, CRUST, CHEESE_AMOUNT, TOPPINGS, DELIVERY_MODE } from "../constants/pizza-options";
 import styles from '../styles/components/OrderSummary.module.css'
 
-const OrderSummary = ({ mode, items }) => {
-  const dispatch = useDispatch();
+const OrderSummary = ({isReadOnly, title, mode, items, setCarryoutMode, setDeliveryMode, removeItemFromCart }) => {
   return (
-    <>
-      {mode && <div><strong>Mode:</strong> {mode}</div>}
+    <div>
+      <h2>{title}</h2>
+          <div>
+          <strong>Mode:</strong> {mode}
+            { (!isReadOnly) &&
+              (mode === DELIVERY_MODE ? (
+                  <button className="text" onClick={setCarryoutMode}>(Switch to Carryout)</button>
+                ) : (
+                  <button className="text" onClick={setDeliveryMode}>(Switch to Delivery)</button>
+                )
+              )
+            }
+          </div>
       <div>
         {items.length === 0 ? (
           <span>No items in your cart -- Add some 'za!</span>
@@ -25,7 +35,9 @@ const OrderSummary = ({ mode, items }) => {
 
               return (
                 <li key={id}>
-                  {displayName} <button className="text" onClick={() => dispatch(removeItemFromCart(id))}>(remove)</button>
+                  {isReadOnly ? (<>{displayName}</>) : (
+                    <>{displayName} <button className="text" onClick={() => removeItemFromCart(id)}>(remove)</button></>
+                  )}
                   <p><strong>Size:</strong> {SIZES[size].displayName}</p>
                   <p><strong>Crust:</strong> {CRUST[crust]?.displayName}</p>
                   <p><strong>Sauce:</strong> {SAUCE[sauce].displayName}</p>
@@ -37,7 +49,7 @@ const OrderSummary = ({ mode, items }) => {
           </ul>
         )}
       </div>
-    </>
+    </div>
   )
 }
 

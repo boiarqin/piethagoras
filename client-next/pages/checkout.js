@@ -1,11 +1,7 @@
-import { useState } from 'react';
-import Link from 'next/link';
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from "react-redux";
-import Modal from 'react-modal';
 import PurchaseFunnel from "../layouts/purchase-funnel";
-import { SIZES, SAUCE, CRUST, CHEESE_AMOUNT, TOPPINGS, FAVORITES, DELIVERY_MODE, CARRYOUT_MODE } from "../constants/pizza-options";
-import { addCheckoutInfo, clearCartAndCheckout, completeCheckout } from '../redux/cart/cartSlice';
+import { completeCheckout } from '../redux/cart/cartSlice';
 import OrderSummary from '../components/order-summary';
 import styles from '../styles/pages/NewOrder.module.css';
 
@@ -32,7 +28,7 @@ const Checkout = () => {
             <h1>Checkout</h1>
             <div className={styles['menu-cart-container']}>
                 <div className={styles.cart}>
-                    <OrderSummary items={items}/>
+                    <OrderSummary isReadOnly title="Your Items" mode={mode} items={items}/>
                 </div>
             </div>
 

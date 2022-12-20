@@ -46,16 +46,15 @@ const NewOrder = () => {
       <h1>Order Now</h1>
       <div className={styles['menu-cart-container']}>
         <div className={styles.cart}>
-          <h2>Your Items</h2>
-          <div>
-            Mode: {mode}
-            {' '}{mode === DELIVERY_MODE ? (
-              <button className="text" onClick={() => dispatch(setCarryoutMode())}>(Switch to Carryout)</button>
-            ) : (
-              <button className="text" onClick={() => dispatch(setDeliveryMode())}>(Switch to Delivery)</button>
-            )}
-          </div>
-          <OrderSummary items={items} />
+          <OrderSummary
+            isReadOnly={false}
+            title="Your Items"
+            mode={mode}
+            items={items}
+            removeItemFromCart={(id) => dispatch(removeItemFromCart(id))}
+            setCarryoutMode={() => dispatch(setCarryoutMode())}
+            setDeliveryMode={() => dispatch(setDeliveryMode())}
+            />
           <Link passHref href="/checkout">
             <button className={`primary {styles.checkout}`}>Go To Checkout</button>
           </Link>

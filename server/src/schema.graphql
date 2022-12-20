@@ -1,9 +1,10 @@
 type Query {
   info: String!
   feed(filter: String, skip: Int, take: Int, orderBy: LinkOrderByInput): Feed!
-  user: User!
+  user(id: ID): User!
   users: [User!]!
   orders: [Order!]!
+  order(id: ID): Order!
 }
 
 type Feed {

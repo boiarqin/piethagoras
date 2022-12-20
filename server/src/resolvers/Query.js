@@ -24,10 +24,20 @@ async function feed(parent, args, context, info) {
   };
 }
 
+async function user(parent, args, context, info) {
+  const user = await context.prisma.user.findUnique({ where: { id: args.id } });;
+  return user
+}
+
 async function users(parent, args, context, info) {
   const users = await context.prisma.user.findMany({
   });
   return users  
+}
+
+async function order(parent, args, context, info) {
+  const order = await context.prisma.order.findUnique({ where: { id: parseInt(args.id) } });
+  return order
 }
 
 async function orders(parent, args, context, info) {
@@ -38,6 +48,8 @@ async function orders(parent, args, context, info) {
 
 module.exports = {
   feed,
+  user,
   users, 
   orders,
+  order,
 };

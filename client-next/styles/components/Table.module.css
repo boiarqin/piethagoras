@@ -1,0 +1,17 @@
+.table {
+    width: 100%;
+    margin: 1rem 0;
+    border: 1px solid #7D1D03;
+}
+
+.table .header {
+    background-color: #FBBF58;
+}
+
+.table .row:nth-child(odd) {
+    background-color: white;
+}
+
+.table .row:nth-child(even) {
+    background-color: #F8EFD9;
+}

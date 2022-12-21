@@ -1,12 +1,50 @@
 import BackOfHouse from "../layouts/back-of-house";
 import Table from '../components/table'
+import { useGetAllEmployeesQuery } from "../redux/services/employees";
+import { userGetAllInventoryItemsQuery } from "../redux/services/inventory";
+
 import sectionStyles from '../styles/components/Sections.module.css';
+
+// const NEW_ORDERS_SUBSCRIPTION = gql`
+//     subscription {
+//         newLink {
+//             id
+//             url
+//             description
+//             createdAt
+//             postedBy {
+//                 id
+//                 name
+//             }
+//             votes {
+//                 id
+//                 user {
+//                     id
+//                 }
+//             }
+//         }
+//     }
+// `;
 
 const Kitchen = ({employees, inventory}) => {
     // const {
     //     title,
     //     content,
     // } = postData;
+
+    const { data: employeesData, error: employeesError, isLoading: isEmployeesLoading } = useGetAllEmployeesQuery()
+
+    console.log(employeesData, employeesError, isEmployeesLoading)
+    // const { data, error, isLoading } = getAllEmployees()
+
+    const ordersColumns = [
+        {accessor: 'orderNumber', displayName: 'Order #'},
+        {accessor: 'createdDate',displayName: 'Created Date'}, // how old is the order
+        {accessor: 'numPizzas', displayName: '# Items'},
+        {accessor: 'status', displayName: 'Status'},
+    ]
+
+    const orders = [];
 
     const employeesColumns = [
         {accessor: 'firstName', displayName: 'First Name'},
@@ -24,12 +62,17 @@ const Kitchen = ({employees, inventory}) => {
 
     return (
         <BackOfHouse>
-            <h1>Back of House</h1>
+            <h1>Kitchen Operations Dashboard</h1>
             <section className={`${sectionStyles.section}`}>
                 <div className={sectionStyles.interior}>
                     <h2>Orders</h2>
-                    view order details
+                    <Table
+                        columns={ordersColumns}
+                        rows={orders}
+                    />
                 </div>
+                <button>View Order Details</button>
+                {/* <chart of business></chart> */}
             </section>
             <section className={`${sectionStyles.section}`}>
                 <div className={sectionStyles.interior}>
@@ -40,6 +83,7 @@ const Kitchen = ({employees, inventory}) => {
                     />
                     <button className="primary">Manage Schedule</button>
                 </div>
+                {/* <schedule chart></schedule> */}
             </section>
             <section className={`${sectionStyles.section}`}>
                 <div className={sectionStyles.interior}>
@@ -56,6 +100,8 @@ const Kitchen = ({employees, inventory}) => {
 }
 
 export default Kitchen;
+
+// SSR next js, rtk query   
 
 export async function getServerSideProps(context) {
 

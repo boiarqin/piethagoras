@@ -4,9 +4,23 @@ A playground application to demonstrate integration of various tools. Project cu
 - /client-next FE pizza shop website (NextJS/Redux Toolkit (RTK))
 
 NextJS features used:
-    - Link, Router, Server-side rendering, API request/response, CSS Modules
+- Link
+- Router
+- Server-side rendering
+- API request/response
+- CSS Modules
 
-TBD: Formik, RTK Query
+TBD:
+- Formik
+- RTK Query
+- RTK Normalization
+- GraphQL Subscriptions
+- Typescript
+
+Things being purposely ignored in this project:
+- Linting/formatting/prettier
+- Import Aliases
+- CSS Preprocessing and variables
 
 # To run:
 1. Go to the `server` folder, install dependencies and start the server. 

@@ -1,7 +1,7 @@
 import BackOfHouse from "../layouts/back-of-house";
 import Table from '../components/table'
 import { useGetAllEmployeesQuery } from "../redux/services/employees";
-import { userGetAllInventoryItemsQuery } from "../redux/services/inventory";
+import { useGetAllInventoryItemsQuery } from "../redux/services/inventory";
 
 import sectionStyles from '../styles/components/Sections.module.css';
 
@@ -26,38 +26,36 @@ import sectionStyles from '../styles/components/Sections.module.css';
 //     }
 // `;
 
-const Kitchen = ({employees, inventory}) => {
+const Kitchen = () => {
     // const {
     //     title,
     //     content,
     // } = postData;
 
-    const { data: employeesData, error: employeesError, isLoading: isEmployeesLoading } = useGetAllEmployeesQuery()
-
-    console.log(employeesData, employeesError, isEmployeesLoading)
-    // const { data, error, isLoading } = getAllEmployees()
+    const { data: employeesData, isLoading: isEmployeesLoading } = useGetAllEmployeesQuery()
+    const { data: inventoryData, isLoading: isInventoryLoading } = useGetAllInventoryItemsQuery()
 
     const ordersColumns = [
-        {accessor: 'orderNumber', displayName: 'Order #'},
-        {accessor: 'createdDate',displayName: 'Created Date'}, // how old is the order
-        {accessor: 'numPizzas', displayName: '# Items'},
-        {accessor: 'status', displayName: 'Status'},
+        { accessor: 'orderNumber', displayName: 'Order #' },
+        { accessor: 'createdDate', displayName: 'Created Date' }, // how old is the order
+        { accessor: 'numPizzas', displayName: '# Items' },
+        { accessor: 'status', displayName: 'Status' },
     ]
 
     const orders = [];
 
     const employeesColumns = [
-        {accessor: 'firstName', displayName: 'First Name'},
-        {accessor: 'lastName',displayName: 'Last Name'},
-        {accessor: 'jobTitle', displayName: 'Role'},
-        {accessor: 'schedule', displayName: 'Schedule'},
+        { accessor: 'firstName', displayName: 'First Name' },
+        { accessor: 'lastName', displayName: 'Last Name' },
+        { accessor: 'jobTitle', displayName: 'Role' },
+        { accessor: 'schedule', displayName: 'Schedule' },
     ]
 
     const inventoryColumns = [
-        {accessor: 'itemName', displayName: 'Item'},
-        {accessor: 'category',displayName: 'Category'},
-        {accessor: 'units', displayName: 'Units'},
-        {accessor: 'unitOfMeasure', displayName: 'Measurement'},
+        { accessor: 'itemName', displayName: 'Item' },
+        { accessor: 'category', displayName: 'Category' },
+        { accessor: 'units', displayName: 'Units' },
+        { accessor: 'unitOfMeasure', displayName: 'Measurement' },
     ]
 
     return (
@@ -77,10 +75,12 @@ const Kitchen = ({employees, inventory}) => {
             <section className={`${sectionStyles.section}`}>
                 <div className={sectionStyles.interior}>
                     <h2>Scheduled Employees</h2>
-                    <Table
-                        columns={employeesColumns}
-                        rows={employees}
-                    />
+                    {isEmployeesLoading ? (<>...Loading</>) :
+                        (<Table
+                            columns={employeesColumns}
+                            rows={employeesData}
+                        />)
+                    }
                     <button className="primary">Manage Schedule</button>
                 </div>
                 {/* <schedule chart></schedule> */}
@@ -88,10 +88,11 @@ const Kitchen = ({employees, inventory}) => {
             <section className={`${sectionStyles.section}`}>
                 <div className={sectionStyles.interior}>
                     <h2>Inventory</h2>
-                    <Table
-                        columns={inventoryColumns}
-                        rows={inventory}
-                    />
+                    {isInventoryLoading ? (<>...Loading</>) :
+                        (<Table
+                            columns={inventoryColumns}
+                            rows={inventoryData}
+                        />)}
                     <button className="primary">Order Items</button>
                 </div>
             </section>
@@ -103,20 +104,20 @@ export default Kitchen;
 
 // SSR next js, rtk query   
 
-export async function getServerSideProps(context) {
+// export async function getServerSideProps(context) {
 
-    const {data: employees} = await fetch(`http://localhost:3000/api/employees`, { method: 'GET' })
-      .then((response) => response.json())
-    
-    const {data: inventory} = await fetch(`http://localhost:3000/api/inventory`, { method: 'GET' })
-      .then((response) => response.json())
+//     const { data: employees } = await fetch(`http://localhost:3000/api/employees`, { method: 'GET' })
+//         .then((response) => response.json())
+
+//     const { data: inventory } = await fetch(`http://localhost:3000/api/inventory`, { method: 'GET' })
+//         .then((response) => response.json())
 
 
-    return {
-      props: {
-        // props for your component
-        inventory,
-        employees,
-      },
-    };
-  }
+//     return {
+//         props: {
+//             // props for your component
+//             inventory,
+//             employees,
+//         },
+//     };
+// }

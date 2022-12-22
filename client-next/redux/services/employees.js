@@ -9,12 +9,16 @@ export const employeesApi = createApi({
     getAllEmployees: builder.query({
         query: () => `employees`,
       }),
-    getEmployeeByID: builder.query({
+    getEmployeeById: builder.query({
       query: (id) => `employees/${id}`,
+      transformResponse: (response) => response.data,
+      transformErrorResponse: (response) => {
+        return response.data.error
+      }
     }),
   }),
 })
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetAllEmployeesQuery, useGetEmployeeByIDQuery } = employeesApi
+export const { useGetAllEmployeesQuery, useGetEmployeeByIdQuery } = employeesApi

@@ -42,7 +42,6 @@ const cmsData = {
 }
 
 export default function handler(req, res) {
-    console.log(req.query)
     const post = cmsData[req.query.slug] || cmsData['default'];
 
     res.status(200).json({ data: post});

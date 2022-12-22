@@ -8,6 +8,7 @@ export const employeesApi = createApi({
   endpoints: (builder) => ({
     getAllEmployees: builder.query({
         query: () => `employees`,
+        transformResponse: (response) => response.data,
       }),
     getEmployeeById: builder.query({
       query: (id) => `employees/${id}`,

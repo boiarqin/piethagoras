@@ -6,13 +6,17 @@ A playground application to demonstrate integration of various tools. Project cu
 NextJS features used:
 - Link
 - Router
+- Pages
 - Server-side rendering
 - API request/response
 - CSS Modules
 
+RTK features used:
+- RTK Query
+- RTK Query response transform and error response transform
+
 TBD:
 - Formik
-- RTK Query
 - RTK Normalization
 - GraphQL Subscriptions
 - Typescript

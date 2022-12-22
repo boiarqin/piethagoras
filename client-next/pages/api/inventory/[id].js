@@ -8,6 +8,6 @@ export default function handler(req, res) {
     if (itemData) {
         res.status(200).json({ data: itemData});
     } else {
-        res.status(404).json({ error: {message: 'Not Found'} });
+        res.status(404).json({ error: {message: 'Item Not Found'} });
     }
 }

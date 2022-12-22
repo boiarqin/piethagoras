@@ -8,13 +8,29 @@ export const inventoryApi = createApi({
   endpoints: (builder) => ({
     getAllInventoryItems: builder.query({
         query: () => `inventory`,
+        transformResponse: (response) => response.data,
       }),
-    getInventoryItemByID: builder.query({
+    getInventoryItemById: builder.query({
       query: (id) => `inventory/${id}`,
+      transformResponse: (response, meta, arg) => {
+        const {
+          units,
+          unitOfMeasure,
+          amountPerUnit
+        } = response.data;
+
+        return {
+          ...response.data,
+          availableQuantity: `${units * amountPerUnit} ${unitOfMeasure}`
+        }
+      },
+      transformErrorResponse: (response) => {
+        return response.data.error
+      }
     }),
   }),
 })
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetAllInventoryItemsQuery, useGetInventoryItemByIDQuery } = inventoryApi
+export const { useGetAllInventoryItemsQuery, useGetInventoryItemByIdQuery } = inventoryApi

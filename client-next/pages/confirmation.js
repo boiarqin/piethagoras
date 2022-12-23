@@ -1,41 +1,39 @@
-import { useRouter } from 'next/router'
 import { useDispatch } from "react-redux";
 import { useQuery, gql } from '@apollo/client';
 import PurchaseFunnel from "../layouts/purchase-funnel";
 import OrderSummary from '../components/order-summary';
 
-const ORDER_QUERY = (id) => gql`
-{
-    order(id: "${id}") {
-        id,
-        createdAt,
-        email,
-        pizzasCount,
-        status,
-        pizzas {
+const ORDER_QUERY = gql`
+    query OrderQuery($id: ID) {
+        order(id: $id) {
             id,
-            size,
-            sauce,
-            cheeseAmount,
-            crust,
-            toppings
+            createdAt,
+            email,
+            status,
+            pizzas {
+                id,
+                size,
+                sauce,
+                cheeseAmount,
+                crust,
+                toppings
+            }
         }
     }
-}
 `
 
-const Confirmation = ({orderInfo}) => {
+const Confirmation = ({orderId, orderInfo}) => {
     const dispatch = useDispatch();
-    const router = useRouter();
-    // const {
-    //     query
-    // }
 
     const {mode} = orderInfo
     let items = []
 
-    const {data} = useQuery(ORDER_QUERY(router.query.id));
-    console.log(data)
+    const {data} = useQuery(ORDER_QUERY, {
+        variables: {
+            id: orderId
+        }
+    });
+    
 
     items = data?.order.pizzas.map( pizza => {
         return {
@@ -128,6 +126,7 @@ export async function getServerSideProps(context) {
     return {
       props: {
         // props for your component
+        orderId: query.id,
         orderInfo,
       },
     };

@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from "react-redux";
 import {useMutation, gql} from '@apollo/client';
 import PurchaseFunnel from "../layouts/purchase-funnel";
-import { completeCheckout } from '../redux/cart/cartSlice';
+import { completeCheckout, clearCartAndCheckoutInfo } from '../redux/cart/cartSlice';
 import OrderSummary from '../components/order-summary';
 import styles from '../styles/pages/NewOrder.module.css';
 
@@ -38,13 +38,31 @@ const Checkout = () => {
             input: {
                 email: 'mcpizzalover@testemail.com',
                 name: 'Hank McPizzaLover',
-                pizzas: items,
+                pizzas: items.map(item => {
+                    const {
+                        displayName: name,
+                        size,
+                        crust,
+                        sauce,
+                        cheeseAmount,
+                        toppings,
+                    } = item;
+                    return {
+                        name,
+                        size,
+                        crust,
+                        sauce,
+                        cheeseAmount,
+                        toppings: toppings.join(','),
+                    }
+                }),
             }
         },
         update: (cache, {data: { placeOrder: {id}}}) => {
             console.log('new order id:', id);
         },
         onCompleted: ({ placeOrder: {id}}) => {
+            dispatch(clearCartAndCheckoutInfo())
             router.push(`/confirmation?id=${id}`)
         }
       });

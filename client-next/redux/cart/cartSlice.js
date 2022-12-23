@@ -41,7 +41,7 @@ export const cartSlice = createSlice({
             state.name = name;
             state.email = email
         },
-        clearCartAndCheckout: (state) => {
+        clearCartAndCheckoutInfo: (state) => {
             console.log('clear cart')
             return initialState;
         },
@@ -49,7 +49,7 @@ export const cartSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { setDeliveryMode, setCarryoutMode, addItemToCart, removeItemFromCart, addCheckoutInfo, clearCartAndCheckout, updateRecentOrderId } = cartSlice.actions
+export const { setDeliveryMode, setCarryoutMode, addItemToCart, removeItemFromCart, addCheckoutInfo, clearCartAndCheckoutInfo, updateRecentOrderId } = cartSlice.actions
 
 export const completeCheckout = createAsyncThunk('checkout', async (userInfo, thunkAPI) => {
     thunkAPI.dispatch(addCheckoutInfo(userInfo));
@@ -68,7 +68,7 @@ export const completeCheckout = createAsyncThunk('checkout', async (userInfo, th
             })
             .then((response) => response.json())
         
-            thunkAPI.dispatch(clearCartAndCheckout());
+            thunkAPI.dispatch(clearCartAndCheckoutInfo());
 
             return orderId;
     } catch (e) {

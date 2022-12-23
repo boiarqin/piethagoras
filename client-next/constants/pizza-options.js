@@ -1,6 +1,53 @@
 export const DELIVERY_MODE = 'DELIVERY';
 export const CARRYOUT_MODE = 'CARRYOUT';
 
+const PIZZA_STATUS = [
+    {
+        displayText: 'Order Placed',
+        description: 'One of our Pizza Artists will be taking care of your order shortly!',
+        averageTime: 2 
+    },
+    {
+        displayText: 'Prep',
+        description: 'Your Pizza Artist is saucing, cheesing, and topping your pie',
+        averageTime: 5
+    },
+    {
+        displayText: 'Bake',
+        description: 'Your pizza is now in our toasty warm oven getting delicious',
+        averageTime: 10 
+    },
+    {
+        displayText: 'Box',
+        description: 'Your pizza is being bundled up for travel in our signature boxes',
+        averageTime: 2 
+    }
+];
+export const DELIVERY_STATUS = [...PIZZA_STATUS,
+    {
+        displayText: 'Out for Delivery',
+        description: 'Our Delivery Associates are on their way with your pizza!',
+        averageTime: 30 
+    },
+    {
+        displayText: 'Delivered',
+        description: 'Enjoy and come back soon!',
+        averageTime: 1 
+    },
+]
+export const CARRYOUT_STATUS = [...PIZZA_STATUS, 
+    {
+        displayText: 'Ready for Pickup',
+        description: 'Your pizza is ready to be collected',
+        averageTime: 1 
+    },
+    {
+        displayText: 'Pick Up',
+        description: 'Enjoy and come back soon!',
+        averageTime: 1 
+    },
+]
+
 export const SIZES = {
     'SMALL':
     {

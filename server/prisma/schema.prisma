@@ -89,10 +89,12 @@ model Vote {
 // }
 // 
 // enum OrderStatus {
-//   NOT_STARTED,
-//   IN_PROGRESS,
-//   READY_FOR_PICKUP,
-//   COMPLETE
+//   ORDER_PLACED,
+//   PREP,
+//   BAKE,
+//   BOX
+//   READY_FOR_PICKUP || OUT FOR DELIVERY,
+//   PICKED_UP || DELIVERED
 // }
 
 // model Pizza {

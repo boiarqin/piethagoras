@@ -1,6 +1,7 @@
 import { useQuery, gql } from '@apollo/client';
 import PurchaseFunnel from "../layouts/purchase-funnel";
 import OrderSummary from '../components/order-summary';
+import OrderStatusTracker from '../components/order-status-tracker';
 
 const ORDER_QUERY = gql`
     query OrderQuery($id: ID) {
@@ -25,6 +26,7 @@ const ORDER_QUERY = gql`
 const Confirmation = ({orderId}) => {
     let items = []
     let mode = '';
+    let status = -1;
 
     const {data} = useQuery(ORDER_QUERY, {
         variables: {
@@ -41,11 +43,13 @@ const Confirmation = ({orderId}) => {
     }) || [];
 
     mode = data?.order.mode;
+    status = data?.order.status;
 
     return (
         <PurchaseFunnel>
             <h1>Thank you for your order!</h1>
             <h2>Order Status Tracker</h2>
+            {(status > -1) && <OrderStatusTracker status={1} mode={mode}/>}
             <OrderSummary isReadOnly title="Order Details" mode={mode} items={items}/>
         </PurchaseFunnel>
     )

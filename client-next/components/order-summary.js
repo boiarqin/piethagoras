@@ -1,8 +1,8 @@
-import { useDispatch } from "react-redux";
 import { SIZES, SAUCE, CRUST, CHEESE_AMOUNT, TOPPINGS, DELIVERY_MODE } from "../constants/pizza-options";
 import styles from '../styles/components/OrderSummary.module.css'
 
 const OrderSummary = ({isReadOnly, title, mode, items, setCarryoutMode, setDeliveryMode, removeItemFromCart }) => {
+
   return (
     <div>
       <h2>{title}</h2>

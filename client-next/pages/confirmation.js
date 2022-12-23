@@ -1,4 +1,3 @@
-import { useDispatch } from "react-redux";
 import { useQuery, gql } from '@apollo/client';
 import PurchaseFunnel from "../layouts/purchase-funnel";
 import OrderSummary from '../components/order-summary';
@@ -12,6 +11,7 @@ const ORDER_QUERY = gql`
             status,
             pizzas {
                 id,
+                name,
                 size,
                 sauce,
                 cheeseAmount,
@@ -22,11 +22,9 @@ const ORDER_QUERY = gql`
     }
 `
 
-const Confirmation = ({orderId, orderInfo}) => {
-    const dispatch = useDispatch();
-
-    const {mode} = orderInfo
+const Confirmation = ({orderId}) => {
     let items = []
+    let mode = '';
 
     const {data} = useQuery(ORDER_QUERY, {
         variables: {
@@ -42,35 +40,13 @@ const Confirmation = ({orderId, orderInfo}) => {
         }
     }) || [];
 
-
-    // router.query.id
-    // const { mode, items } = useSelector((state) => state.cart)
-
-    // const finishCheckout = () => {
-    //     dispatch(completeCheckout({
-    //         name: 'Hank McPizzaLover',
-    //         email: 'mcpizzalover@testemail.com'
-    //     }))
-    //     .unwrap()
-    //     .then((orderId) => {
-    //         // navigate to confirmation page
-    //         router.push(`/confirmation/${orderId}`)
-    //     })
-    // }
+    mode = data?.order.mode;
 
     return (
         <PurchaseFunnel>
             <h1>Thank you for your order!</h1>
             <h2>Order Status Tracker</h2>
-            <OrderSummary title="Order Details" mode={mode} items={items}/>
-            {/* <div className={styles['menu-cart-container']}>
-                <div className={styles.cart}></div>
-            </div>
-
-            <div><strong>Name: </strong> Hank McPizzaLover</div>
-            <div><strong>Email: </strong> mcpizzalover@testemail.com</div>
-
-            <button onClick={finishCheckout}>Finish Checkout</button> */}
+            <OrderSummary isReadOnly title="Order Details" mode={mode} items={items}/>
         </PurchaseFunnel>
     )
 }
@@ -82,52 +58,9 @@ export async function getServerSideProps(context) {
 
     console.log('confirmation id ' + query.id)
 
-    // const {data: postData} = await fetch(`http://localhost:3000/api/cms/post?slug=${params.slug}`, { method: 'GET' })
-    //   .then((response) => response.json())
-  
-    const orderInfo = {
-        "items": [
-            {
-                "displayName": "Tuscan Garden",
-                "size": "MEDIUM",
-                "crust": "THIN_CRISPY",
-                "sauce": "ALFREDO",
-                "cheeseAmount": "REGULAR",
-                "toppings": [
-                    "TOMATO",
-                    "BLACK_OLIVE",
-                    "GREEN_PEPPER",
-                    "ONION"
-                ],
-                "id": "ac1951e1-039c-4f33-884f-783b85af549b"
-            },
-            {
-                "displayName": "Piethagoras Feast",
-                "size": "MEDIUM",
-                "crust": "ORIGINAL",
-                "sauce": "MARINARA",
-                "cheeseAmount": "REGULAR",
-                "toppings": [
-                    "PEPPERONI",
-                    "SAUSAGE",
-                    "HAM",
-                    "GREEN_PEPPER",
-                    "BLACK_OLIVE",
-                    "ONION"
-                ],
-                "id": "3875d30c-5107-4f27-99d9-b58ffaf68461"
-            }
-        ],
-        "name": "Hank McPizzaLover",
-        "email": "mcpizzalover@testemail.com",
-        "mode": "DELIVERY"
-    }
-
     return {
       props: {
-        // props for your component
         orderId: query.id,
-        orderInfo,
       },
     };
   }

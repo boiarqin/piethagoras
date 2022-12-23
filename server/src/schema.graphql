@@ -46,7 +46,8 @@ type User {
 }
 
 input OrderInput {
-  userId: String!
+  name: String!
+  email: String!
   pizzas: [PizzaInput!]!
 }
 

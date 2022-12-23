@@ -86,10 +86,33 @@ async function vote(parent, args, context, info) {
 }
 
 async function placeOrder(parent, args, context, info) {
+  name = args.input.name
+  const email = (args.input.email).toLowerCase();
+  const user = await context.prisma.user.findUnique({
+    where: {
+      email,
+    }
+  });
+  let userId;
+
+  if (!user) {
+    // create the new user
+    const newUser = await context.prisma.user.create({
+      data: {
+        name: args.input.name,
+        email,
+        password: 'password123' // very secure
+      },
+    });
+    userId = newUser.id
+  } else {
+    userId = user.id
+  }
+  
   const newOrder = await context.prisma.order.create({
     data: {
-      user: { connect: { id: args.input.userId } },
-      email: "testemail@test.com",
+      user: { connect: { id: userId } },
+      email,
       pizzas: {
         create: args.input.pizzas,
       },

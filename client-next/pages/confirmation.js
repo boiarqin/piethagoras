@@ -26,7 +26,8 @@ const ORDER_QUERY = gql`
 const STATUS_SUBSCRIPTION = gql`
     subscription OrderStatusSubscription($id: ID!) {
         orderStatus(id: $id) {
-            id
+            id,
+            status
         }
     }
 `
@@ -42,7 +43,14 @@ const Confirmation = ({orderId}) => {
         }
     });
 
-    console.log('orderquery', data, loading)
+    items = data?.order.pizzas.map( pizza => {
+        return {
+            ...pizza,
+            toppings: pizza.toppings.split(',')
+        }
+    }) || [];
+    mode = data?.order.mode;
+    status = data?.order.status; // set initial value
     
     const {
         data: statusData,
@@ -53,22 +61,12 @@ const Confirmation = ({orderId}) => {
         }
     });
 
-    console.log('status', statusData, statusLoading)
-
-    items = data?.order.pizzas.map( pizza => {
-        return {
-            ...pizza,
-            toppings: pizza.toppings.split(',')
-        }
-    }) || [];
-
-    mode = data?.order.mode;
-    status = data?.order.status;
+    status = statusData?.orderStatus.status || status; // set updated value
 
     return (
         <PurchaseFunnel>
             <h1>Thank you for your order!</h1>
-            {(status > -1) && <OrderStatusTracker status={1} mode={mode}/>}
+            {(status > -1) && <OrderStatusTracker status={status} mode={mode}/>}
             <OrderSummary isReadOnly title="Order Details" mode={mode} items={items}/>
         </PurchaseFunnel>
     )

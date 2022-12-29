@@ -37,8 +37,6 @@ const OrderStatusTracker = ({mode, status}) => {
         description
     } = statusInfo
 
-    console.log(statusInfo)
-
     return (
         <section className={`${sectionStyles.section} ${orderStatusTrackerStyles['order-status-tracker']} ${sectionStyles['section-dough']}`}>
           <div className={`${sectionStyles.interior} ${orderStatusTrackerStyles.interior}`}>

@@ -27,8 +27,8 @@ type Subscription {
   newLink: Link
   newVote: Vote
   newOrder: Order
-  updateOrderStatus: Order
-  updatePizzaStatus: Pizza
+  orderStatus(id: ID!): Order
+  pizzaStatus(id: ID!): Pizza
 }
 
 type AuthPayload {

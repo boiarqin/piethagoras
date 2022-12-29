@@ -35,9 +35,10 @@ function updateOrderStatusSubscribe(parent, args, context, info) {
   return context.pubsub.asyncIterator("UPDATE_ORDER_STATUS");
 }
 
-const updateOrderStatus = {
+const orderStatus = {
   subscribe: updateOrderStatusSubscribe,
   resolve: (payload) => {
+    console.log("UPDATE_ORDER_STATUS", payload)
     return payload;
   },
 };
@@ -46,7 +47,7 @@ function updatePizzaStatusSubscribe(parent, args, context, info) {
   return context.pubsub.asyncIterator("UPDATE_PIZZA_STATUS");
 }
 
-const updatePizzaStatus = {
+const pizzaStatus = {
   subscribe: updatePizzaStatusSubscribe,
   resolve: (payload) => {
     return payload;
@@ -57,6 +58,6 @@ module.exports = {
   newLink,
   newVote,
   newOrder,
-  updateOrderStatus,
-  updatePizzaStatus,
+  orderStatus,
+  pizzaStatus,
 };

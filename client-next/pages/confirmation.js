@@ -1,4 +1,4 @@
-import { useQuery, gql } from '@apollo/client';
+import { useQuery, gql, useSubscription } from '@apollo/client';
 import PurchaseFunnel from "../layouts/purchase-funnel";
 import OrderSummary from '../components/order-summary';
 import OrderStatusTracker from '../components/order-status-tracker';
@@ -23,17 +23,37 @@ const ORDER_QUERY = gql`
     }
 `
 
+const STATUS_SUBSCRIPTION = gql`
+    subscription OrderStatusSubscription($id: ID!) {
+        orderStatus(id: $id) {
+            id
+        }
+    }
+`
+
 const Confirmation = ({orderId}) => {
     let items = []
     let mode = '';
     let status = -1;
 
-    const {data} = useQuery(ORDER_QUERY, {
+    const {data, loading} = useQuery(ORDER_QUERY, {
         variables: {
             id: orderId
         }
     });
+
+    console.log('orderquery', data, loading)
     
+    const {
+        data: statusData,
+        loading: statusLoading,
+      } = useSubscription(STATUS_SUBSCRIPTION, {
+        variables: {
+            id: orderId
+        }
+    });
+
+    console.log('status', statusData, statusLoading)
 
     items = data?.order.pizzas.map( pizza => {
         return {
@@ -48,7 +68,6 @@ const Confirmation = ({orderId}) => {
     return (
         <PurchaseFunnel>
             <h1>Thank you for your order!</h1>
-            <h2>Order Status Tracker</h2>
             {(status > -1) && <OrderStatusTracker status={1} mode={mode}/>}
             <OrderSummary isReadOnly title="Order Details" mode={mode} items={items}/>
         </PurchaseFunnel>

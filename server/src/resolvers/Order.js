@@ -10,12 +10,7 @@ const pizzas = (parent, args, context) => {
 };
 
 const pizzasCount = async (parent, args, context) => {
-  // const count = await context.prisma.pizza.count({where: {orderId: parent.id}});
-  const count = await context.prisma.pizza.count();
-
-  console.log(parent);
-
-  // const count = parent.pizzas().count()
+  const count = await context.prisma.pizza.count({where: {orderId: parent.id}});
 
   return count;
 };

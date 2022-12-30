@@ -134,8 +134,6 @@ async function changeOrderStatus(parent, args, context, info) {
     },
   });
 
-  console.log(updateOrder)
-
   context.pubsub.publish("UPDATE_ORDER_STATUS", updateOrder);
 
   return updateOrder;

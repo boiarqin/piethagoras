@@ -1,3 +1,5 @@
+const { withFilter } = require('graphql-subscriptions');
+
 function newLinkSubscribe(parent, args, context, info) {
   return context.pubsub.asyncIterator("NEW_LINK");
 }
@@ -36,9 +38,14 @@ function updateOrderStatusSubscribe(parent, args, context, info) {
 }
 
 const orderStatus = {
-  subscribe: updateOrderStatusSubscribe,
+  subscribe: withFilter(updateOrderStatusSubscribe, (payload, variables) => {
+    // Only push an update if the comment is on
+    // the correct repository for this operation
+    return (
+      payload.id == variables.id // typing problem again
+    );
+}),
   resolve: (payload) => {
-    console.log("UPDATE_ORDER_STATUS", payload)
     return payload;
   },
 };

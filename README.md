@@ -11,6 +11,11 @@ NextJS features used:
 - API request/response
 - CSS Modules
 
+GraphQL/Apollo features used:
+- Query
+- Mutation
+- Subscription (with filter)
+
 RTK features used:
 - RTK Query
 - RTK Query response transform and error response transform
@@ -18,7 +23,6 @@ RTK features used:
 TBD:
 - Formik
 - RTK Normalization
-- GraphQL Subscriptions
 - Typescript
 
 Things being purposely ignored in this project:

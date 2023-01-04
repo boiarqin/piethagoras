@@ -1,150 +1,161 @@
-const  {PrismaClient} = require("@prisma/client")
+const { PrismaClient } = require("@prisma/client")
 const prisma = new PrismaClient();
 
 async function main() {
   // Delete all `User` and `Message` records
-//   await prisma.message.deleteMany({});
-  await prisma.user.deleteMany({});
+  //   await prisma.message.deleteMany({});
+
   await prisma.pizza.deleteMany({});
   await prisma.order.deleteMany({});
+  await prisma.user.deleteMany({});
   // (Re-)Create dummy `User` and `Message` records
   await prisma.user.create({
     data: {
       name: "Jack",
-      email: "jack@fakemail.com",
+      email: "jack.donaghy@fakemail.com",
       password: "jack123"
     },
   });
   await prisma.user.create({
     data: {
       name: "Liz",
-      email: "Liz@fakemail.com",
+      email: "liz.lemon@fakemail.com",
       password: "liz123",
       orders: {
         create: [
-            {
-                email: "pizzalover@testgmail.com",
-                pizzas: {
-                  create: [
-                    {
-                      name: "Small Hawaiian BBQ",
-                      size: "SMALL",
-                      crust: "THIN_CRISPY",
-                      sauce: "BBQ",
-                      cheeseAmount: "LIGHT",
-                      toppings: "BACON,PINEAPPLE,JALAPENO"
-                    },
-                    {
-                      name: "Large Vegan Delight",
-                      size: "LARGE",
-                      crust: "GLUTEN_FREE",
-                      sauce: "NONE",
-                      cheeseAmount: "NONE",
-                      toppings: "MUSHROOM,ONION,BLACK_OLIVE,TOMATO,GREEN_PEPPER"
-                    }
-                  ],
+          {
+            mode: 'DELIVERY',
+            pizzas: {
+              create: [
+                {
+                  name: "Small Hawaiian BBQ",
+                  size: "SMALL",
+                  crust: "THIN_CRISPY",
+                  sauce: "BBQ",
+                  cheeseAmount: "LIGHT",
+                  toppings: "BACON,PINEAPPLE,JALAPENO"
                 },
-              },
+                {
+                  name: "Large Vegan Delight",
+                  size: "LARGE",
+                  crust: "GLUTEN_FREE",
+                  sauce: "NONE",
+                  cheeseAmount: "NONE",
+                  toppings: "MUSHROOM,ONION,BLACK_OLIVE,TOMATO,GREEN_PEPPER"
+                }
+              ],
+            },
+          },
+          {
+            mode: 'CARRYOUT',
+            pizzas: {
+              create: [
+                {
+                  name: "Large Chicago Feast",
+                  size: "LARGE",
+                  crust: "DEEP_DISH",
+                  sauce: "MARINARA",
+                  cheeseAmount: "HEAVY",
+                  toppings: "PEPPERONI,SAUSAGE,ONION,MUSHROOM,GREEN_PEPPER"
+                },
+                {
+                  name: "Medium Buffalo Chicken",
+                  size: "MEDIUM",
+                  crust: "ORIGINAL",
+                  sauce: "BUFFALO",
+                  cheeseAmount: "REGULAR",
+                  toppings: "CHICKEN,ONION"
+                }
+              ],
+            },
+          },
         ]
       }
     },
   });
-//   await prisma.user.create({
-//     data: {
-//       name: "Adam",
-//       email: "adam@fakemail.com",
-//       password: "adam123"
-//     },
-//   });
-//   await prisma.pizza.create({
-//     data: {
-//       name: "Large Chicago Feast",
-//       size: PizzaSize.LARGE,
-//       crust: Crust.DEEP_DISH,
-//       sauce: Sauce.MARINARA,
-//       cheeseAmount: CheeseAmount.HEAVY,
-//       toppings: [Topping.PEPPERONI, Topping.SAUSAGE, Topping.ONION, Topping.MUSHROOM, Topping.GREEN_PEPPER]
-//     }
-//   });
-//   await prisma.pizza.create({
-//     data: {
-//       name: "Medium Buffalo Chicken",
-//       size: PizzaSize.MEDIUM,
-//       crust: Crust.ORIGINAL,
-//       sauce: Sauce.BUFFALO,
-//       cheeseAmount: CheeseAmount.REGULAR,
-//       toppings: [Topping.CHICKEN, Topping.ONION]
-//     }
-//   });
-//   await prisma.pizza.create({
-//     data: {
-//       name: "Small Vegan Delight",
-//       size: PizzaSize.SMALL,
-//       crust: Crust.GLUTEN_FREE,
-//       sauce: Sauce.NONE,
-//       cheeseAmount: CheeseAmount.NONE,
-//       toppings: [Topping.MUSHROOM, Topping.ONION, Topping.BLACK_OLIVE, Topping.TOMATO, Topping.GREEN_PEPPER]
-//     }
-//   });
-//   await prisma.pizza.create({
-//     data: {
-//       name: "Extra Large Hawaiian BBQ",
-//       size: PizzaSize.XLARGE,
-//       crust: Crust.THIN_CRISPY,
-//       sauce: Sauce.BBQ,
-//       cheeseAmount: CheeseAmount.LIGHT,
-//       toppings: [Topping.BACON, Topping.PINEAPPLE, Topping.JALAPENO]
-//     }
-//   });
-//   await prisma.order.create({
-//     data: {
-//       email: "pizzalover@testgmail.com",
-//       pizzas: {
-//         create: [
-//           {
-//             name: "Small Hawaiian BBQ",
-//             size: PizzaSize.SMALL,
-//             crust: Crust.THIN_CRISPY,
-//             sauce: Sauce.BBQ,
-//             cheeseAmount: CheeseAmount.LIGHT,
-//             toppings: [Topping.BACON, Topping.PINEAPPLE, Topping.JALAPENO]
-//           },
-//           {
-//             name: "Large Vegan Delight",
-//             size: PizzaSize.LARGE,
-//             crust: Crust.GLUTEN_FREE,
-//             sauce: Sauce.NONE,
-//             cheeseAmount: CheeseAmount.NONE,
-//             toppings: [Topping.MUSHROOM, Topping.ONION, Topping.BLACK_OLIVE, Topping.TOMATO, Topping.GREEN_PEPPER]
-//           }
-//         ],
-//       },
-//     },
-//   });
-//   await prisma.order.create({
-//     data: {
-//       email: "cheeselover@testgmail.com",
-//       pizzas: {
-//         create: [
-//           {
-//             name: "Small Chicago Feast",
-//             size: PizzaSize.SMALL,
-//             crust: Crust.DEEP_DISH,
-//             sauce: Sauce.MARINARA,
-//             cheeseAmount: CheeseAmount.HEAVY,
-//             toppings: [Topping.PEPPERONI, Topping.SAUSAGE, Topping.ONION, Topping.MUSHROOM, Topping.GREEN_PEPPER]
-//           }, {
-//             name: "Extra Large Buffalo Chicken",
-//             size: PizzaSize.XLARGE,
-//             crust: Crust.ORIGINAL,
-//             sauce: Sauce.BUFFALO,
-//             cheeseAmount: CheeseAmount.REGULAR,
-//             toppings: [Topping.CHICKEN, Topping.ONION]
-//           }
-//         ]
-//       }
-//     }
-//     });
+  await prisma.user.create({
+    data: {
+      name: "Kenneth",
+      email: "kenneth.parcell@fakemail.com",
+      password: "chuckle123",
+      orders: {
+        create: [
+          {
+            mode: "DELIVERY",
+            pizzas: {
+              create: [
+                {
+                  name: "Extra Large Hawaiian BBQ",
+                  size: "XLARGE",
+                  crust: "THIN_CRISPY",
+                  sauce: "BBQ",
+                  cheeseAmount: "LIGHT",
+                  toppings: "BACON,PINEAPPLE,JALAPENO"
+                }
+              ]
+            }
+          },
+          {
+            mode: "DELIVERY",
+            pizzas: {
+              create: [
+                {
+                  name: 'Memphis Smokeshow',
+                  size: "XLARGE",
+                  crust: "ORIGINAL",
+                  sauce: "BBQ",
+                  cheeseAmount: "LIGHT",
+                  toppings: "CHICKEN,BACON,PINEAPPLE,JALAPENO,ONION"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  });
+  await prisma.user.create({
+    data: {
+      name: "Tracy",
+      email: "tracy.jordan@fakemail.com",
+      password: "angie123",
+      orders: {
+        create: [
+          {
+            mode: "CARRYOUT",
+            pizzas: {
+              create: [
+                {
+                  name: 'Sicilian Monster',
+                  size: "XLARGE",
+                  cheeseAmount: "HEAVY",
+                  crust: "DEEP_DISH",
+                  sauce: "MARINARA",
+                  toppings: "PEPPERONI,SAUSAGE,HAM,CHICKEN,BACON"
+                },
+                {
+                  name: 'The Bushwhacker',
+                  size: "XLARGE",
+                  cheeseAmount: "HEAVY",
+                  crust: "DEEP_DISH",
+                  sauce: "MARINARA",
+                  toppings: "TOMATO,MUSHROOM,GREEN_PEPPER,BLACK_OLIVE,ONION"
+                },
+                {
+                  name: 'Bianca',
+                  size: "XLARGE",
+                  cheeseAmount: "HEAVY",
+                  crust: "ORIGINAL",
+                  sauce: "ALFREDO",
+                  toppings: "SAUSAGE,GREEN_PEPPER"
+                },
+              ]
+            }
+          }
+        ]
+      }
+    }
+  });
 }
 
 main().then(() => {

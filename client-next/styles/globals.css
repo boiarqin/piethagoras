@@ -80,6 +80,13 @@ button.primary {
   cursor:pointer;
 }
 
+button.primary:disabled {
+  background-color: lightgray;
+  border-color: gray;
+  color: black;
+  cursor: not-allowed;
+}
+
 button.text {
   display: inline;
   padding: 0;

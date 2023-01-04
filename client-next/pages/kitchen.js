@@ -1,9 +1,23 @@
+import { gql, useQuery } from "@apollo/client";
 import BackOfHouse from "../layouts/back-of-house";
 import Table from '../components/table'
 import { useGetAllEmployeesQuery } from "../redux/services/employees";
 import { useGetAllInventoryItemsQuery } from "../redux/services/inventory";
+import {DELIVERY_MODE, DELIVERY_STATUS, CARRYOUT_STATUS } from "../constants/pizza-options";
 
 import sectionStyles from '../styles/components/Sections.module.css';
+
+
+const ALL_ORDERS_QUERY = gql`
+    query {
+        orders {
+            id
+            createdAt
+            pizzasCount
+            status
+        }
+    }
+`
 
 // const NEW_ORDERS_SUBSCRIPTION = gql`
 //     subscription {
@@ -35,14 +49,16 @@ const Kitchen = () => {
     const { data: employeesData, isLoading: isEmployeesLoading } = useGetAllEmployeesQuery()
     const { data: inventoryData, isLoading: isInventoryLoading } = useGetAllInventoryItemsQuery()
 
-    const ordersColumns = [
-        { accessor: 'orderNumber', displayName: 'Order #' },
-        { accessor: 'createdDate', displayName: 'Created Date' }, // how old is the order
-        { accessor: 'numPizzas', displayName: '# Items' },
-        { accessor: 'status', displayName: 'Status' },
-    ]
+    let orders = [];
 
-    const orders = [];
+    const ordersColumns = [
+        { accessor: 'id', displayName: 'Order #' },
+        { accessor: 'createdAt', displayName: 'Created Date' },
+        { accessor: 'timeElapsed', displayName: 'Time Elapsed' }, // how old is the order
+        { accessor: 'pizzasCount', displayName: '# Items' },
+        { accessor: 'statusText', displayName: 'Status' },
+        // { accessor: 'mode', displayName: 'Mode' }
+    ]
 
     const employeesColumns = [
         { accessor: 'firstName', displayName: 'First Name' },
@@ -58,6 +74,31 @@ const Kitchen = () => {
         { accessor: 'unitOfMeasure', displayName: 'Measurement' },
     ]
 
+    const { data: ordersData
+    } = useQuery(ALL_ORDERS_QUERY, {
+        pollInterval: 5000
+    });
+
+    orders = ordersData?.orders.map((order) => {
+        const {
+            mode,
+            createdAt,
+            status
+        } = order;
+
+        const statusInfo = (mode === DELIVERY_MODE) ? DELIVERY_STATUS : CARRYOUT_STATUS;
+
+        return {
+            ...order,
+            timeElapsed: Date.now() - (new Date(createdAt)).getTime(),
+            statusText: statusInfo[status].displayText
+        }
+
+    }) || []
+    // also only show only incomplete orders
+    // sort by time elapsed
+    // poll for new/updated orders on consistent basis
+
     return (
         <BackOfHouse>
             <h1>Kitchen Operations Dashboard</h1>
@@ -67,9 +108,11 @@ const Kitchen = () => {
                     <Table
                         columns={ordersColumns}
                         rows={orders}
+                        index="id"
+                        actionText="View Details"
+                        actionPath="orders"
                     />
                 </div>
-                <button>View Order Details</button>
                 {/* <chart of business></chart> */}
             </section>
             <section className={`${sectionStyles.section}`}>
@@ -79,9 +122,11 @@ const Kitchen = () => {
                         (<Table
                             columns={employeesColumns}
                             rows={employeesData}
+                            index="id"
+                            actionText="Manage Schedule"
+                            actionPath="employees"
                         />)
                     }
-                    <button className="primary">Manage Schedule</button>
                 </div>
                 {/* <schedule chart></schedule> */}
             </section>
@@ -92,8 +137,10 @@ const Kitchen = () => {
                         (<Table
                             columns={inventoryColumns}
                             rows={inventoryData}
+                            index="id"
+                            actionText="Order Items"
+                            actionPath="inventory"
                         />)}
-                    <button className="primary">Order Items</button>
                 </div>
             </section>
         </BackOfHouse>

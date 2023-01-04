@@ -38,6 +38,7 @@ const Checkout = () => {
             input: {
                 email: 'mcpizzalover@testemail.com',
                 name: 'Hank McPizzaLover',
+                mode,
                 pizzas: items.map(item => {
                     const {
                         displayName: name,

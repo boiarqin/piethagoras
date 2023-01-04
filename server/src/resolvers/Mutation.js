@@ -112,7 +112,6 @@ async function placeOrder(parent, args, context, info) {
   const newOrder = await context.prisma.order.create({
     data: {
       user: { connect: { id: userId } },
-      email,
       pizzas: {
         create: args.input.pizzas,
       },

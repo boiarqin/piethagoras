@@ -48,6 +48,7 @@ type User {
 input OrderInput {
   name: String!
   email: String!
+  mode: String!
   pizzas: [PizzaInput!]!
 }
 

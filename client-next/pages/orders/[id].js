@@ -10,8 +10,8 @@ const ORDER_QUERY = gql`
         order(id: $id) {
             id,
             createdAt,
-            email,
             status,
+            mode,
             pizzas {
                 id,
                 name,

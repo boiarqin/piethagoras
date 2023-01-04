@@ -14,38 +14,13 @@ const ALL_ORDERS_QUERY = gql`
             id
             createdAt
             pizzasCount
-            status
+            status,
+            mode
         }
     }
 `
 
-// const NEW_ORDERS_SUBSCRIPTION = gql`
-//     subscription {
-//         newLink {
-//             id
-//             url
-//             description
-//             createdAt
-//             postedBy {
-//                 id
-//                 name
-//             }
-//             votes {
-//                 id
-//                 user {
-//                     id
-//                 }
-//             }
-//         }
-//     }
-// `;
-
 const Kitchen = () => {
-    // const {
-    //     title,
-    //     content,
-    // } = postData;
-
     const { data: employeesData, isLoading: isEmployeesLoading } = useGetAllEmployeesQuery()
     const { data: inventoryData, isLoading: isInventoryLoading } = useGetAllInventoryItemsQuery()
 
@@ -57,7 +32,7 @@ const Kitchen = () => {
         { accessor: 'timeElapsed', displayName: 'Time Elapsed' }, // how old is the order
         { accessor: 'pizzasCount', displayName: '# Items' },
         { accessor: 'statusText', displayName: 'Status' },
-        // { accessor: 'mode', displayName: 'Mode' }
+        { accessor: 'mode', displayName: 'Mode' }
     ]
 
     const employeesColumns = [

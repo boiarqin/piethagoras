@@ -53,7 +53,7 @@ const OrderStatusTracker = ({mode, status}) => {
 
             <progress className={orderStatusTrackerStyles['progress-bar']} id="order-status" max={avgTotalTime} value={avgTimeElapsed}> {displayText} </progress>
             <label className={orderStatusTrackerStyles.label} htmlFor="order-status">
-                <strong>{displayText}:</strong>{description}
+                <strong>{displayText}: </strong>{description}
             </label>
           </div>
         </section>

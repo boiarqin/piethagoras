@@ -63,7 +63,7 @@ input PizzaInput {
 type Order {
   id: ID!
   createdAt: DateTime!
-  email: String!
+  mode: String!
   pizzasCount: Int
   pizzas: [Pizza!]!
   status: Int

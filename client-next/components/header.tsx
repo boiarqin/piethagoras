@@ -1,10 +1,14 @@
 import Link from 'next/link';
-import { useDispatch, useSelector } from "react-redux";
+import { useAppSelector } from '../redux/hooks';
 import clsx from "clsx"
 import styles from '../styles/components/Header.module.css'
 
-const Header = ({isKitchen}) => {
-  const {items} = useSelector((state) => state.cart)
+type Props = {
+  isKitchen: Boolean; 
+}
+
+const Header = ({isKitchen} : Props) => {
+  const {items} = useAppSelector((state) => state.cart)
 
     return (
         <header className={clsx(styles.header, {[styles.kitchen]: isKitchen})}>

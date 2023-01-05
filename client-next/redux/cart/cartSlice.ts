@@ -1,13 +1,21 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
+import type { RootState } from '../store';
 import { DELIVERY_MODE, CARRYOUT_MODE } from '../../constants/pizza-options'
 import { v4 as uuidv4 } from 'uuid';
+import type { Pizza, CheckoutInfo } from '../../types/pizza.types';
 
-const initialState = {
+interface CartState {
+    mode: string,
+    items: Pizza[],
+    name: string,
+    email: string
+}
+
+const initialState: CartState = {
     mode: DELIVERY_MODE,
     items: [],
     name: '',
     email: '',
-    recentOrderId: null
 }
 
 export const cartSlice = createSlice({
@@ -20,14 +28,14 @@ export const cartSlice = createSlice({
         setCarryoutMode: (state) => {
             state.mode = CARRYOUT_MODE
         },
-        addItemToCart: (state, action) => {
+        addItemToCart: (state, action: PayloadAction<Pizza>) => {
             const newItem = {
                 ...action.payload,
                 id: uuidv4()
             };
             state.items.push(newItem)
         },
-        removeItemFromCart: (state, action) => {
+        removeItemFromCart: (state, action: PayloadAction<string>) => {
             const itemId = action.payload
             const index = state.items.findIndex(item => item.id = itemId);
 
@@ -35,23 +43,22 @@ export const cartSlice = createSlice({
                 state.items.splice(index, 1)
             }
         },
-        addCheckoutInfo: (state, action) => {
+        addCheckoutInfo: (state, action: PayloadAction<CheckoutInfo>) => {
             const { name, email } = action.payload;
 
             state.name = name;
             state.email = email
         },
-        clearCartAndCheckoutInfo: (state) => {
-            console.log('clear cart')
+        clearCartAndCheckoutInfo: () => {
             return initialState;
         },
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { setDeliveryMode, setCarryoutMode, addItemToCart, removeItemFromCart, addCheckoutInfo, clearCartAndCheckoutInfo, updateRecentOrderId } = cartSlice.actions
+export const { setDeliveryMode, setCarryoutMode, addItemToCart, removeItemFromCart, addCheckoutInfo, clearCartAndCheckoutInfo } = cartSlice.actions
 
-export const completeCheckout = createAsyncThunk('checkout', async (userInfo, thunkAPI) => {
+export const completeCheckout = createAsyncThunk<string, CheckoutInfo, {state: RootState}>('checkout', async (userInfo, thunkAPI) => {
     thunkAPI.dispatch(addCheckoutInfo(userInfo));
     const { cart: {items, name, email, mode} } = thunkAPI.getState();
 

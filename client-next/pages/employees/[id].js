@@ -12,12 +12,13 @@ const EmployeeDetail = ({employeeId}) => {
         jobTitle,
         schedule
     } = employeesData || {};
+
     return (
         <BackOfHouse>
 
             {isEmployeesLoading && <>...Loading</>}
 
-            {employeesError && <>Error: {employeesError.message}</>}
+            {employeesError && <>Error: {employeesError.statusText}</>}
 
             {employeesData && (
                 <>

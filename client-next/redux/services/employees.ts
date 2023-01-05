@@ -1,20 +1,25 @@
 // Need to use the React-specific entry point to import createApi
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import type {Employee, LegacySystemError} from '../../types/kitchen.types'
 
 // Define a service using a base URL and expected endpoints
 export const employeesApi = createApi({
   reducerPath: 'employees',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000/api/' }),
   endpoints: (builder) => ({
-    getAllEmployees: builder.query({
+    getAllEmployees: builder.query<Employee[], null>({
         query: () => `employees`,
-        transformResponse: (response) => response.data,
+        transformResponse: (response : {data: Employee[]}) => response.data,
       }),
-    getEmployeeById: builder.query({
+    getEmployeeById: builder.query<Employee, number>({
       query: (id) => `employees/${id}`,
-      transformResponse: (response) => response.data,
-      transformErrorResponse: (response) => {
-        return response.data.error
+      transformResponse: (response : {data : Employee}) => response.data,
+      transformErrorResponse: (response : {status: number, data: LegacySystemError}) => {
+        return {
+            status: response.status,
+            statusText: response.data.error.message,
+            data: response.data,
+        }
       }
     }),
   }),

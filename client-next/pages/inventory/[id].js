@@ -19,7 +19,7 @@ const InventoryItemDetail = ({itemId}) => {
     return (
         <BackOfHouse>
             {isItemLoading && <>...Loading</>}
-            {itemError  && <>Error: {itemError.message}</>}
+            {itemError  && <>Error: {itemError.statusText}</>}
             {itemData && (
                 <>
                     <h1>Item Detail: {itemName}</h1>

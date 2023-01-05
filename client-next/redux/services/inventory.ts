@@ -1,18 +1,19 @@
 // Need to use the React-specific entry point to import createApi
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import type {InventoryItem, LegacySystemError} from '../../types/kitchen.types'
 
 // Define a service using a base URL and expected endpoints
 export const inventoryApi = createApi({
   reducerPath: 'inventory',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000/api/' }),
   endpoints: (builder) => ({
-    getAllInventoryItems: builder.query({
+    getAllInventoryItems: builder.query<InventoryItem[], null>({
         query: () => `inventory`,
-        transformResponse: (response) => response.data,
+        transformResponse: (response : { data: InventoryItem[]}) => response.data,
       }),
-    getInventoryItemById: builder.query({
+    getInventoryItemById: builder.query<InventoryItem, number>({
       query: (id) => `inventory/${id}`,
-      transformResponse: (response, meta, arg) => {
+      transformResponse: (response : {data: InventoryItem}, meta, arg) => {
         const {
           units,
           unitOfMeasure,
@@ -24,8 +25,12 @@ export const inventoryApi = createApi({
           availableQuantity: `${units * amountPerUnit} ${unitOfMeasure}`
         }
       },
-      transformErrorResponse: (response) => {
-        return response.data.error
+      transformErrorResponse: (response : {status: number, data: LegacySystemError}) => {
+        return {
+          status: response.status,
+          statusText: response.data.error.message,
+          data: response.data,
+      }
       }
     }),
   }),

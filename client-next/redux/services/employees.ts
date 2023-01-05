@@ -17,8 +17,7 @@ export const employeesApi = createApi({
       transformErrorResponse: (response : {status: number, data: LegacySystemError}) => {
         return {
             status: response.status,
-            statusText: response.data.error.message,
-            data: response.data,
+            data: response.data.error.message,
         }
       }
     }),

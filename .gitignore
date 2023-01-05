@@ -2,3 +2,4 @@
 /node_modules
 /client-next/node_modules
 /client-next/.next
+/client-next/next-env.d.ts

@@ -1,27 +1,29 @@
+import type { ReactNode } from 'react';
 import Head from 'next/head'
 import Footer from '../components/footer'
-import HeaderSimple from '../components/header-simple';
-import ContactHours from '../components/contact-hours';
+import Header from '../components/header';
 
-const PurchaseFunnel = ({ children }) => {
+interface Props {
+    children: ReactNode
+}
+
+const BackOfHouse = ({ children } : Props) => {
     return (
         <div className="container">
             <Head>
-                <title>Piethagoras Pizza | Order Online</title>
+                <title>Piethagoras Pizza | Back of House</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <HeaderSimple />
+            <Header isKitchen />
 
             <main className="main">
                 {children}
             </main>
-
-            <ContactHours />
 
             <Footer />
         </div>
     )
 }
 
-export default PurchaseFunnel;
+export default BackOfHouse;

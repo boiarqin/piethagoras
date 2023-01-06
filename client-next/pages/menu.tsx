@@ -64,9 +64,6 @@ const Post = () => {
                     </div>
                 </div>
             </div>
-
-
-
         </BlogPost>
     )
 }

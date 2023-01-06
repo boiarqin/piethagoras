@@ -21,40 +21,36 @@ import {
 } from "../redux/cart/cartSlice";
 import OrderSummary from "../components/order-summary";
 import AddFavoritesModal from "../components/add-favorites-modal";
+import AddBYOModal from "../components/add-byo-modal";
 import styles from "../styles/pages/NewOrder.module.css";
 
 const NewOrder = () => {
   const dispatch = useDispatch();
   const { mode, items } = useSelector((state) => state.cart);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isFavoritesModalOpen, setIsFavoritesModalOpen] = useState(false);
+  const [isBYOModalOpen, setIsBYOModalOpen] = useState(false);
   const [selectedPizza, setSelectedPizza] = useState(null);
 
-  // const openModal =
   const openFavoritesModal = (pizza) => {
     setSelectedPizza(pizza);
-    setIsModalOpen(true);
+    setIsFavoritesModalOpen(true);
   };
-  const addFavoritesToCart = (pizza) => {
-    console.log(selectedPizza);
-    dispatch(
-      // addItemToCart({
-      //   displayName: selectedPizza.displayName,
-      //   size: selectedSize,
-      //   crust: selectedPizza.crust.key,
-      //   sauce: selectedPizza.sauce.key,
-      //   cheeseAmount: selectedCheeseAmt,
-      //   toppings: selectedPizza.toppings.map((topping) => topping.key),
-      // })
-      addItemToCart(pizza)
-    );
+
+  const openBYOModal = () => {
+    setIsBYOModalOpen(true);
+  };
+
+  const addPizzaToCart = (pizza) => {
+    console.log(pizza);
+    dispatch(addItemToCart(pizza));
     closeModal();
   };
-  // const openBYOModal = () => { }
+
   const closeModal = () => {
     setSelectedPizza(null);
-    // setSelectedSize(SIZES.MEDIUM.key);
-    setIsModalOpen(false);
+    setIsFavoritesModalOpen(false);
+    setIsBYOModalOpen(false);
   };
 
   return (
@@ -104,7 +100,7 @@ const NewOrder = () => {
               );
             })}
             <li key="byo" className={styles["card-wrapper"]}>
-              <button className={styles.card}>
+              <button className={styles.card} onClick={openBYOModal}>
                 <h3>Build Your Own</h3>
                 <p>
                   <em>Have it your way!</em>
@@ -114,11 +110,18 @@ const NewOrder = () => {
           </ul>
         </div>
       </div>
-      {isModalOpen && (
+      {isFavoritesModalOpen && (
         <AddFavoritesModal
-          isModalOpen={isModalOpen}
+          isModalOpen={isFavoritesModalOpen}
           selectedPizza={selectedPizza}
-          addFavoritesToCart={addFavoritesToCart}
+          addPizzaToCart={addPizzaToCart}
+          onCloseModal={closeModal}
+        />
+      )}
+      {isBYOModalOpen && (
+        <AddBYOModal
+          isModalOpen={isBYOModalOpen}
+          addPizzaToCart={addPizzaToCart}
           onCloseModal={closeModal}
         />
       )}

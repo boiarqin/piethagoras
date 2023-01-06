@@ -7,14 +7,14 @@ interface Props {
   isModalOpen: boolean;
   selectedPizza: PresetPizza;
   onCloseModal: Function;
-  addFavoritesToCart: Function;
+  addPizzaToCart: Function;
 }
 
 const AddFavoritesModal = ({
   isModalOpen,
   selectedPizza,
   onCloseModal,
-  addFavoritesToCart,
+  addPizzaToCart,
 }: Props) => {
   const [selectedSize, setSelectedSize] = useState(SIZES.MEDIUM.key);
   const [selectedCheeseAmt, setSelectedCheeseAmt] = useState(
@@ -29,7 +29,7 @@ const AddFavoritesModal = ({
   };
 
   const addToCart = () => {
-    addFavoritesToCart({
+    addPizzaToCart({
       displayName: selectedPizza.displayName,
       size: selectedSize,
       crust: selectedPizza.crust.key,

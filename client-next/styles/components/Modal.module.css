@@ -1,0 +1,51 @@
+.modal {
+  position: absolute;
+  inset: 40px;
+  border: 1px solid #7d1d03;
+  box-shadow: rgb(0 0 0 / 75%) 0px 0px 0.8125rem 0px;
+  background: white;
+  overflow: auto;
+  border-radius: 4px;
+  outline: none;
+  padding: 1rem;
+}
+
+.modal .header {
+  position: absolute;
+  left: 2rem;
+  right: 2rem;
+  top: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 2rem;
+}
+
+.modal .title {
+  margin: 0;
+}
+
+.modal .close-button {
+  background: white;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.modal .footer {
+  position: absolute;
+  left: 2rem;
+  right: 2rem;
+  bottom: 2rem;
+  height: 2rem;
+  text-align: right;
+}
+
+.modal .content {
+  position: absolute;
+  top: 4rem;
+  left: 2rem;
+  right: 2rem;
+  bottom: 4rem;
+  overflow: scroll;
+}

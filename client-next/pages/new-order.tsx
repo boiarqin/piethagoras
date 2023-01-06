@@ -1,18 +1,10 @@
 import { useState } from "react";
 import Link from "next/link";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useAppSelector } from "../redux/hooks";
 
 import PurchaseFunnel from "../layouts/purchase-funnel";
-import {
-  SIZES,
-  SAUCE,
-  CRUST,
-  CHEESE_AMOUNT,
-  TOPPINGS,
-  FAVORITES,
-  DELIVERY_MODE,
-  CARRYOUT_MODE,
-} from "../constants/pizza-options";
+import { FAVORITES } from "../constants/pizza-options";
 import {
   setDeliveryMode,
   setCarryoutMode,
@@ -26,7 +18,7 @@ import styles from "../styles/pages/NewOrder.module.css";
 
 const NewOrder = () => {
   const dispatch = useDispatch();
-  const { mode, items } = useSelector((state) => state.cart);
+  const { mode, items } = useAppSelector((state) => state.cart);
 
   const [isFavoritesModalOpen, setIsFavoritesModalOpen] = useState(false);
   const [isBYOModalOpen, setIsBYOModalOpen] = useState(false);

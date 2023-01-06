@@ -1,3 +1,4 @@
+import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link';
 import Image from 'next/image';
@@ -8,8 +9,13 @@ import StartYourOrder from '../components/start-your-order';
 import Header from '../components/header';
 import styles from '../styles/pages/Home.module.css';
 import sectionStyles from '../styles/components/Sections.module.css';
+import type {BlogPost} from '../types/blog.types'
 
-export default function Home({ allPostsData }) {
+interface Props {
+  allPostsData: BlogPost[]
+}
+
+export default function Home({ allPostsData } : Props) {
   return (
     <div className="container">
       <Head>
@@ -96,7 +102,7 @@ export default function Home({ allPostsData }) {
   )
 }
 
-export async function getServerSideProps(context) {
+export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
 
   const {data: allPostsData} = await fetch('http://localhost:3000/api/cms/posts', { method: 'GET' })
     .then((response) => response.json())

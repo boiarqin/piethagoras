@@ -1,11 +1,9 @@
 import { GetServerSideProps } from 'next'
 import BlogPost from "../../layouts/blog-post";
+import type { BlogPost as BlogPostType } from '../../types/blog.types';
 
 interface Props {
-  postData: {
-    title: string,
-    content: string
-  }
+  postData: BlogPostType
 }
 
 const Post = ({postData} : Props) => {

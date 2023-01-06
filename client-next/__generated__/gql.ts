@@ -14,9 +14,9 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "\n    mutation UpdateOrderStats(\n        $id: ID!,\n        $newStatus: Int!\n    ) {\n        changeOrderStatus(id: $id, newStatus: $newStatus) {\n            id\n        }\n    }\n": types.UpdateOrderStatsDocument,
-    "\n    query GetAllOrders {\n        orders {\n            id\n            createdAt\n            pizzasCount\n            status,\n            mode\n        }\n    }\n": types.GetAllOrdersDocument,
     "\n    query OrderQuery($id: ID) {\n        order(id: $id) {\n            id,\n            createdAt,\n            status,\n            mode,\n            pizzas {\n                id,\n                name,\n                size,\n                sauce,\n                cheeseAmount,\n                crust,\n                toppings\n            }\n        }\n    }\n": types.OrderQueryDocument,
     "\n    subscription OrderStatusSubscription($id: ID!) {\n        orderStatus(id: $id) {\n            id,\n            status\n        }\n    }\n": types.OrderStatusSubscriptionDocument,
+    "\n    query GetAllOrders {\n        orders {\n            id\n            createdAt\n            pizzasCount\n            status,\n            mode\n        }\n    }\n": types.GetAllOrdersDocument,
 };
 
 /**
@@ -40,15 +40,15 @@ export function gql(source: "\n    mutation UpdateOrderStats(\n        $id: ID!,
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n    query GetAllOrders {\n        orders {\n            id\n            createdAt\n            pizzasCount\n            status,\n            mode\n        }\n    }\n"): (typeof documents)["\n    query GetAllOrders {\n        orders {\n            id\n            createdAt\n            pizzasCount\n            status,\n            mode\n        }\n    }\n"];
-/**
- * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
 export function gql(source: "\n    query OrderQuery($id: ID) {\n        order(id: $id) {\n            id,\n            createdAt,\n            status,\n            mode,\n            pizzas {\n                id,\n                name,\n                size,\n                sauce,\n                cheeseAmount,\n                crust,\n                toppings\n            }\n        }\n    }\n"): (typeof documents)["\n    query OrderQuery($id: ID) {\n        order(id: $id) {\n            id,\n            createdAt,\n            status,\n            mode,\n            pizzas {\n                id,\n                name,\n                size,\n                sauce,\n                cheeseAmount,\n                crust,\n                toppings\n            }\n        }\n    }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n    subscription OrderStatusSubscription($id: ID!) {\n        orderStatus(id: $id) {\n            id,\n            status\n        }\n    }\n"): (typeof documents)["\n    subscription OrderStatusSubscription($id: ID!) {\n        orderStatus(id: $id) {\n            id,\n            status\n        }\n    }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n    query GetAllOrders {\n        orders {\n            id\n            createdAt\n            pizzasCount\n            status,\n            mode\n        }\n    }\n"): (typeof documents)["\n    query GetAllOrders {\n        orders {\n            id\n            createdAt\n            pizzasCount\n            status,\n            mode\n        }\n    }\n"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};

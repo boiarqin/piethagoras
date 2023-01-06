@@ -1,9 +1,11 @@
-import { useQuery, gql, useSubscription } from '@apollo/client';
+import { GetServerSideProps } from 'next'
+import { useQuery, useSubscription } from '@apollo/client';
+import { gql } from '../__generated__/gql';
 import PurchaseFunnel from "../layouts/purchase-funnel";
 import OrderSummary from '../components/order-summary';
 import OrderStatusTracker from '../components/order-status-tracker';
 
-const ORDER_QUERY = gql`
+const ORDER_QUERY = gql(`
     query OrderQuery($id: ID) {
         order(id: $id) {
             id,
@@ -21,18 +23,22 @@ const ORDER_QUERY = gql`
             }
         }
     }
-`
+`)
 
-const STATUS_SUBSCRIPTION = gql`
+const STATUS_SUBSCRIPTION = gql(`
     subscription OrderStatusSubscription($id: ID!) {
         orderStatus(id: $id) {
             id,
             status
         }
     }
-`
+`)
 
-const Confirmation = ({orderId}) => {
+interface Props {
+    orderId: string
+}
+
+const Confirmation = ({orderId} : Props) => {
     let items = []
     let mode = '';
     let status = -1;
@@ -74,14 +80,14 @@ const Confirmation = ({orderId}) => {
 
 export default Confirmation;
 
-export async function getServerSideProps(context) {
+export const getServerSideProps : GetServerSideProps<Props> = async (context) => {
     const {query} = context;
 
     console.log('confirmation id ' + query.id)
 
     return {
       props: {
-        orderId: query.id,
+        orderId: query.id.toString(),
       },
     };
   }

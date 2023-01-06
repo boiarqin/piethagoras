@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
-import Modal from "react-modal";
+
 import PurchaseFunnel from "../layouts/purchase-funnel";
 import {
   SIZES,
@@ -20,42 +20,41 @@ import {
   removeItemFromCart,
 } from "../redux/cart/cartSlice";
 import OrderSummary from "../components/order-summary";
+import AddFavoritesModal from "../components/add-favorites-modal";
 import styles from "../styles/pages/NewOrder.module.css";
 
 const NewOrder = () => {
   const dispatch = useDispatch();
   const { mode, items } = useSelector((state) => state.cart);
 
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPizza, setSelectedPizza] = useState(null);
-  const [selectedSize, setSelectedSize] = useState(SIZES.MEDIUM.key);
-  const [selectedCheeseAmt, setSelectedCheeseAmt] = useState(
-    CHEESE_AMOUNT.REGULAR.key
-  );
+
   // const openModal =
   const openFavoritesModal = (pizza) => {
     setSelectedPizza(pizza);
-    setModalIsOpen(true);
+    setIsModalOpen(true);
   };
-  const addFavoritesToCart = () => {
+  const addFavoritesToCart = (pizza) => {
     console.log(selectedPizza);
     dispatch(
-      addItemToCart({
-        displayName: selectedPizza.displayName,
-        size: selectedSize,
-        crust: selectedPizza.crust.key,
-        sauce: selectedPizza.sauce.key,
-        cheeseAmount: selectedCheeseAmt,
-        toppings: selectedPizza.toppings.map((topping) => topping.key),
-      })
+      // addItemToCart({
+      //   displayName: selectedPizza.displayName,
+      //   size: selectedSize,
+      //   crust: selectedPizza.crust.key,
+      //   sauce: selectedPizza.sauce.key,
+      //   cheeseAmount: selectedCheeseAmt,
+      //   toppings: selectedPizza.toppings.map((topping) => topping.key),
+      // })
+      addItemToCart(pizza)
     );
     closeModal();
   };
   // const openBYOModal = () => { }
   const closeModal = () => {
     setSelectedPizza(null);
-    setSelectedSize(SIZES.MEDIUM.key);
-    setModalIsOpen(false);
+    // setSelectedSize(SIZES.MEDIUM.key);
+    setIsModalOpen(false);
   };
 
   return (
@@ -115,71 +114,13 @@ const NewOrder = () => {
           </ul>
         </div>
       </div>
-      {modalIsOpen && (
-        <Modal
-          isOpen={modalIsOpen}
-          // onAfterOpen={afterOpenModal}
-          // onRequestClose={closeModal}
-          // style={customStyles}
-          contentLabel="Finish customizing your pizza"
-        >
-          <h2>{selectedPizza.displayName}</h2>
-
-          <p>
-            <em>{selectedPizza.description}</em>
-          </p>
-          <p>
-            <strong>Crust:</strong> {selectedPizza.crust.displayName}
-          </p>
-          <p>
-            <strong>Sauce:</strong> {selectedPizza.sauce.displayName}
-          </p>
-          <p>
-            <strong>Toppings:</strong>{" "}
-            {selectedPizza.toppings
-              .map((topping) => topping.displayName)
-              .join(", ")}
-          </p>
-
-          <form>
-            <label>
-              Choose size:
-              <select
-                onChange={(e) => setSelectedSize(e.target.value)}
-                value={SIZES.MEDIUM.key}
-              >
-                {Object.keys(SIZES).map((key) => {
-                  const size = SIZES[key];
-
-                  return (
-                    <option key={size.key} value={size.key}>
-                      {size.displayName} - {size.description}
-                    </option>
-                  );
-                })}
-              </select>
-            </label>
-            <label>
-              Choose cheese amount:
-              <select
-                onChange={(e) => setSelectedCheeseAmt(e.target.value)}
-                value={CHEESE_AMOUNT.REGULAR.key}
-              >
-                {Object.keys(CHEESE_AMOUNT).map((key) => {
-                  const amt = CHEESE_AMOUNT[key];
-
-                  return (
-                    <option key={amt.key} value={amt.key}>
-                      {amt.displayName} - {amt.description}
-                    </option>
-                  );
-                })}
-              </select>
-            </label>
-          </form>
-          <button onClick={addFavoritesToCart}>Add to Cart</button>
-          <button onClick={closeModal}>close</button>
-        </Modal>
+      {isModalOpen && (
+        <AddFavoritesModal
+          isModalOpen={isModalOpen}
+          selectedPizza={selectedPizza}
+          addFavoritesToCart={addFavoritesToCart}
+          onCloseModal={closeModal}
+        />
       )}
     </PurchaseFunnel>
   );

@@ -1,4 +1,5 @@
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
+import { gql } from '../__generated__/gql';
 import BackOfHouse from "../layouts/back-of-house";
 import Table from '../components/table'
 import { useGetAllEmployeesQuery } from "../redux/services/employees";
@@ -7,9 +8,8 @@ import {DELIVERY_MODE, DELIVERY_STATUS, CARRYOUT_STATUS } from "../constants/piz
 
 import sectionStyles from '../styles/components/Sections.module.css';
 
-
-const ALL_ORDERS_QUERY = gql`
-    query {
+const ALL_ORDERS_QUERY = gql(`
+    query GetAllOrders {
         orders {
             id
             createdAt
@@ -18,7 +18,7 @@ const ALL_ORDERS_QUERY = gql`
             mode
         }
     }
-`
+`)
 
 const Kitchen = () => {
     const { data: employeesData, isLoading: isEmployeesLoading } = useGetAllEmployeesQuery()

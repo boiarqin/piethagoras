@@ -7,7 +7,7 @@ export const employeesApi = createApi({
   reducerPath: 'employees',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000/api/' }),
   endpoints: (builder) => ({
-    getAllEmployees: builder.query<Employee[], null>({
+    getAllEmployees: builder.query<Employee[], void>({
         query: () => `employees`,
         transformResponse: (response : {data: Employee[]}) => response.data,
       }),

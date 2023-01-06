@@ -7,7 +7,7 @@ export const inventoryApi = createApi({
   reducerPath: 'inventory',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000/api/' }),
   endpoints: (builder) => ({
-    getAllInventoryItems: builder.query<InventoryItem[], null>({
+    getAllInventoryItems: builder.query<InventoryItem[], void>({
         query: () => `inventory`,
         transformResponse: (response : { data: InventoryItem[]}) => response.data,
       }),

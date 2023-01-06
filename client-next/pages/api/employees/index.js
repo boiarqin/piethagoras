@@ -1,7 +1,7 @@
-import { EMPLOYEES } from "./data"
+import { EMPLOYEES } from "./data";
 
 export default function handler(req, res) {
-    res.status(200).json({
-        data: EMPLOYEES
-    })
+  res.status(200).json({
+    data: EMPLOYEES,
+  });
 }

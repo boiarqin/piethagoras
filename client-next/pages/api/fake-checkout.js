@@ -1,5 +1,5 @@
 export default function handler(req, res) {
-    res.status(200).json({
-        data: {message: 'success', orderId: '123abc'}
-    });
+  res.status(200).json({
+    data: { message: "success", orderId: "123abc" },
+  });
 }

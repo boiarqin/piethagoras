@@ -1,56 +1,56 @@
 .order-status-tracker .interior {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
 }
 
 .order-status-tracker .status-options {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 2rem;
-    align-items: stretch;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 2rem;
+  align-items: stretch;
 }
 .order-status-tracker .status-options .option {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    height: 100%;
-    border-right: 1px solid #618222;
-    font-size: .5rem;
-    text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 100%;
+  border-right: 1px solid #618222;
+  font-size: 0.5rem;
+  text-transform: uppercase;
 }
 .order-status-tracker .status-options .option:first-child {
-    border-left: 1px solid #618222;
+  border-left: 1px solid #618222;
 }
 
 .order-status-tracker .progress-bar {
-    -webkit-appearance: none;
-    appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
 
-    height: 5rem;
-    width: 100%;
-    border-radius: 5rem;
-    margin: 1rem 0;
+  height: 5rem;
+  width: 100%;
+  border-radius: 5rem;
+  margin: 1rem 0;
 }
 
-
 .order-status-tracker .progress-bar::-webkit-progress-bar {
-    background-color: #F8EFD9;
-    border-radius: 5rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+  background-color: #f8efd9;
+  border-radius: 5rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
 }
 
 .order-status-tracker .progress-bar::-webkit-progress-value {
-background-image:
-        -webkit-linear-gradient(-45deg, 
-                                transparent 33%, rgba(0, 0, 0, .1) 33%, 
-                                rgba(0,0, 0, .1) 66%, transparent 66%),
-        -webkit-linear-gradient(top, 
-                                rgba(255, 255, 255, .25), 
-                                rgba(0, 0, 0, .25)),
-        -webkit-linear-gradient(left, #7EA92C, #618222);
+  background-image: -webkit-linear-gradient(
+      -45deg,
+      transparent 33%,
+      rgba(0, 0, 0, 0.1) 33%,
+      rgba(0, 0, 0, 0.1) 66%,
+      transparent 66%
+    ),
+    -webkit-linear-gradient(top, rgba(255, 255, 255, 0.25), rgba(0, 0, 0, 0.25)),
+    -webkit-linear-gradient(left, #7ea92c, #618222);
 
-    border-radius: 5rem; 
-    background-size: 10rem 5rem, 100% 100%, 100% 100%;
+  border-radius: 5rem;
+  background-size: 10rem 5rem, 100% 100%, 100% 100%;
 }

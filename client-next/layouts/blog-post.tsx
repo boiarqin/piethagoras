@@ -1,42 +1,40 @@
-import Head from 'next/head'
-import type { ReactNode } from 'react';
-import ContactHours from '../components/contact-hours';
-import Careers from '../components/careers';
-import Footer from '../components/footer'
-import StartYourOrder from '../components/start-your-order';
-import Header from '../components/header';
-import styles from '../styles/layouts/BlogPost.module.css';
+import Head from "next/head";
+import type { ReactNode } from "react";
+import ContactHours from "../components/contact-hours";
+import Careers from "../components/careers";
+import Footer from "../components/footer";
+import StartYourOrder from "../components/start-your-order";
+import Header from "../components/header";
+import styles from "../styles/layouts/BlogPost.module.css";
 
 interface Props {
-    children: ReactNode
+  children: ReactNode;
 }
 
-const BlogPost = ({ children } : Props) => {
-    return (
-        <div className="container">
-            <Head>
-                <title>Piethagoras Pizza | Order Online</title>
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
+const BlogPost = ({ children }: Props) => {
+  return (
+    <div className="container">
+      <Head>
+        <title>Piethagoras Pizza | Order Online</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
 
-            <Header />
+      <Header />
 
-            <main className="main">
-                <article className={styles['blog-post']}>
-                    <div className={styles.interior}>
-                        {children}
-                    </div>
-                </article>
-            </main>
+      <main className="main">
+        <article className={styles["blog-post"]}>
+          <div className={styles.interior}>{children}</div>
+        </article>
+      </main>
 
-            <StartYourOrder />
-            <Careers />
+      <StartYourOrder />
+      <Careers />
 
-            <ContactHours />
+      <ContactHours />
 
-            <Footer />
-        </div>
-    )
-}
+      <Footer />
+    </div>
+  );
+};
 
 export default BlogPost;

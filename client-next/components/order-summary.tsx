@@ -1,47 +1,63 @@
-import { SIZES, SAUCE, CRUST, CHEESE_AMOUNT, TOPPINGS, DELIVERY_MODE } from "../constants/pizza-options";
+import {
+  SIZES,
+  SAUCE,
+  CRUST,
+  CHEESE_AMOUNT,
+  TOPPINGS,
+  DELIVERY_MODE,
+} from "../constants/pizza-options";
 import type { Pizza } from "../types/pizza.types";
-import styles from '../styles/components/OrderSummary.module.css'
+import styles from "../styles/components/OrderSummary.module.css";
 import { MouseEventHandler } from "react";
 
 interface Props {
   /** Set to false to display edit buttons */
-  isReadOnly: boolean,
+  isReadOnly: boolean;
   /** Heading text */
-  title: string,
+  title: string;
   /** Delivery mode */
-  mode: string,
+  mode: string;
   /** List of pizzas to display info for */
-  items: Pizza[],
+  items: Pizza[];
   /** Used in conjunction with isReadOnly=true */
-  setCarryoutMode?: MouseEventHandler,
+  setCarryoutMode?: MouseEventHandler;
   /** Used in conjunction with isReadOnly=true */
-  setDeliveryMode?: MouseEventHandler,
+  setDeliveryMode?: MouseEventHandler;
   /** Used in conjunction with isReadOnly=true */
-  removeItemFromCart?: Function
+  removeItemFromCart?: Function;
 }
 
-const OrderSummary = ({isReadOnly, title, mode, items, setCarryoutMode, setDeliveryMode, removeItemFromCart } : Props) => {
-
+const OrderSummary = ({
+  isReadOnly,
+  title,
+  mode,
+  items,
+  setCarryoutMode,
+  setDeliveryMode,
+  removeItemFromCart,
+}: Props) => {
   return (
     <div>
       <h2>{title}</h2>
-          <div>
-          <strong>Mode:</strong> {mode}
-            { (!isReadOnly) &&
-              (mode === DELIVERY_MODE ? (
-                  <button className="text" onClick={setCarryoutMode}>(Switch to Carryout)</button>
-                ) : (
-                  <button className="text" onClick={setDeliveryMode}>(Switch to Delivery)</button>
-                )
-              )
-            }
-          </div>
+      <div>
+        <strong>Mode:</strong> {mode}
+        {!isReadOnly &&
+          (mode === DELIVERY_MODE ? (
+            <button className="text" onClick={setCarryoutMode}>
+              (Switch to Carryout)
+            </button>
+          ) : (
+            <button className="text" onClick={setDeliveryMode}>
+              (Switch to Delivery)
+            </button>
+          ))}
+      </div>
       <div>
         {items.length === 0 ? (
           <span>No items in your cart -- Add some 'za!</span>
         ) : (
           <ul className={styles.items}>
-            {items.map(item => {
+            {items.map((item) => {
               const {
                 id,
                 displayName,
@@ -49,27 +65,51 @@ const OrderSummary = ({isReadOnly, title, mode, items, setCarryoutMode, setDeliv
                 crust,
                 sauce,
                 cheeseAmount,
-                toppings
+                toppings,
               } = item;
 
               return (
                 <li key={id}>
-                  {isReadOnly ? (<>{displayName}</>) : (
-                    <>{displayName} <button className="text" onClick={() => removeItemFromCart(id)}>(remove)</button></>
+                  {isReadOnly ? (
+                    <>{displayName}</>
+                  ) : (
+                    <>
+                      {displayName}{" "}
+                      <button
+                        className="text"
+                        onClick={() => removeItemFromCart(id)}
+                      >
+                        (remove)
+                      </button>
+                    </>
                   )}
-                  <p><strong>Size:</strong> {SIZES[size].displayName}</p>
-                  <p><strong>Crust:</strong> {CRUST[crust]?.displayName}</p>
-                  <p><strong>Sauce:</strong> {SAUCE[sauce].displayName}</p>
-                  <p><strong>Cheese Amount:</strong> {CHEESE_AMOUNT[cheeseAmount]?.displayName}</p>
-                  <p><strong>Toppings:</strong> {toppings.map((topping) => TOPPINGS[topping]?.displayName).join(', ')}</p>
+                  <p>
+                    <strong>Size:</strong> {SIZES[size].displayName}
+                  </p>
+                  <p>
+                    <strong>Crust:</strong> {CRUST[crust]?.displayName}
+                  </p>
+                  <p>
+                    <strong>Sauce:</strong> {SAUCE[sauce].displayName}
+                  </p>
+                  <p>
+                    <strong>Cheese Amount:</strong>{" "}
+                    {CHEESE_AMOUNT[cheeseAmount]?.displayName}
+                  </p>
+                  <p>
+                    <strong>Toppings:</strong>{" "}
+                    {toppings
+                      .map((topping) => TOPPINGS[topping]?.displayName)
+                      .join(", ")}
+                  </p>
                 </li>
-              )
+              );
             })}
           </ul>
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default OrderSummary;

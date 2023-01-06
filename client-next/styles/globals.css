@@ -42,9 +42,8 @@ body {
   font-size: 16px;
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 * {
   box-sizing: border-box;
@@ -67,17 +66,16 @@ body {
   align-items: center;
   width: 100%;
   padding: 5rem 0 0 0;
-          
 }
 
 button.primary {
   padding: 0.5rem 1rem;
-  background-color: #7EA92C;
+  background-color: #7ea92c;
   border-color: #618222;
   color: white;
   text-transform: uppercase;
   border-radius: 8px;
-  cursor:pointer;
+  cursor: pointer;
 }
 
 button.primary:disabled {
@@ -93,9 +91,9 @@ button.text {
   background-color: transparent;
   border-width: 0;
   border-color: none;
-  color: #7EA92C;
+  color: #7ea92c;
   text-decoration: underline;
   text-transform: none;
   border-radius: 8px;
-  cursor:pointer;
+  cursor: pointer;
 }

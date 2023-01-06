@@ -1,7 +1,26 @@
 import { SIZES, SAUCE, CRUST, CHEESE_AMOUNT, TOPPINGS, DELIVERY_MODE } from "../constants/pizza-options";
+import type { Pizza } from "../types/pizza.types";
 import styles from '../styles/components/OrderSummary.module.css'
+import { MouseEventHandler } from "react";
 
-const OrderSummary = ({isReadOnly, title, mode, items, setCarryoutMode, setDeliveryMode, removeItemFromCart }) => {
+interface Props {
+  /** Set to false to display edit buttons */
+  isReadOnly: boolean,
+  /** Heading text */
+  title: string,
+  /** Delivery mode */
+  mode: string,
+  /** List of pizzas to display info for */
+  items: Pizza[],
+  /** Used in conjunction with isReadOnly=true */
+  setCarryoutMode?: MouseEventHandler,
+  /** Used in conjunction with isReadOnly=true */
+  setDeliveryMode?: MouseEventHandler,
+  /** Used in conjunction with isReadOnly=true */
+  removeItemFromCart?: Function
+}
+
+const OrderSummary = ({isReadOnly, title, mode, items, setCarryoutMode, setDeliveryMode, removeItemFromCart } : Props) => {
 
   return (
     <div>

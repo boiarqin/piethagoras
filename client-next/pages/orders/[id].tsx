@@ -1,11 +1,12 @@
-import { useQuery, gql, useSubscription } from '@apollo/client';
+import { GetServerSideProps } from 'next'
+import { useQuery, useSubscription } from '@apollo/client';
+import { gql } from '../../__generated__/gql';
 import BackOfHouse from "../../layouts/back-of-house";
 import OrderSummary from '../../components/order-summary';
 import OrderStatusTracker from '../../components/order-status-tracker';
 import PizzaControlPanel from '../../components/pizza-control-panel';
-// import sectionStyles from '../../styles/components/Sections.module.css';
 
-const ORDER_QUERY = gql`
+const ORDER_QUERY = gql(`
     query OrderQuery($id: ID) {
         order(id: $id) {
             id,
@@ -23,18 +24,22 @@ const ORDER_QUERY = gql`
             }
         }
     }
-`
+`)
 
-const STATUS_SUBSCRIPTION = gql`
+const STATUS_SUBSCRIPTION = gql(`
     subscription OrderStatusSubscription($id: ID!) {
         orderStatus(id: $id) {
             id,
             status
         }
     }
-`
+`)
 
-const OrderDetail = ({orderId}) => {
+interface Props {
+    orderId: string
+}
+
+const OrderDetail = ({orderId}: Props) => {
     let items = []
     let mode = '';
     let status = -1;
@@ -84,12 +89,12 @@ const OrderDetail = ({orderId}) => {
 
 export default OrderDetail;
 
-export async function getServerSideProps(context) {
+export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
     return {
       props: {
         // props for your component
         // workaround for nextjs router not being immediately available
-        orderId: context.query.id,
+        orderId: context.query.id.toString(),
       },
     };
   }

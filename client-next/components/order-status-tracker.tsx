@@ -2,6 +2,11 @@ import {DELIVERY_MODE, DELIVERY_STATUS, CARRYOUT_STATUS } from "../constants/piz
 import sectionStyles from '../styles/components/Sections.module.css'
 import orderStatusTrackerStyles from '../styles/components/OrderStatusTracker.module.css'
 
+interface Props {
+    mode: string,
+    status: number
+}
+
 const getStatusInfo = (mode, status) => {
     const allStatusInfo = (mode === DELIVERY_MODE) ? DELIVERY_STATUS : CARRYOUT_STATUS;
 
@@ -27,7 +32,7 @@ const getStatusInfo = (mode, status) => {
 
 }
 
-const OrderStatusTracker = ({mode, status}) => {
+const OrderStatusTracker = ({mode, status} : Props) => {
     const allStatusInfo = (mode === DELIVERY_MODE) ? DELIVERY_STATUS : CARRYOUT_STATUS;
     const statusInfo = getStatusInfo(mode, status);
     const {

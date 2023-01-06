@@ -1,8 +1,8 @@
-import { useMutation, gql } from '@apollo/client';
-import {DELIVERY_MODE, DELIVERY_STATUS, CARRYOUT_STATUS } from "../constants/pizza-options";
+import { useMutation } from '@apollo/client';
+import { gql } from '../__generated__/gql';
+import {DELIVERY_MODE } from "../constants/pizza-options";
 import sectionStyles from '../styles/components/Sections.module.css'
 import pizzaControlPanelStyles from '../styles/components/PizzaControlPanel.module.css'
-
 
 const PIZZA_CONTROL_OPTIONS = [
     'Throw it away and start over',
@@ -21,7 +21,7 @@ const CARRYOUT_CONTROL_OPTIONS = [
     'Pizza has been picked up'
 ]
 
-const UPDATE_ORDER_STATUS_MUTATION = gql`
+const UPDATE_ORDER_STATUS_MUTATION = gql(`
     mutation UpdateOrderStats(
         $id: ID!,
         $newStatus: Int!
@@ -30,9 +30,15 @@ const UPDATE_ORDER_STATUS_MUTATION = gql`
             id
         }
     }
-`;
+`);
 
-const PizzaControlPanel = ({orderId, mode, status}) => {
+interface Props {
+    orderId: string,
+    mode: string,
+    status: Number
+}
+
+const PizzaControlPanel = ({orderId, mode, status}: Props) => {
     const controlOptions = (mode === DELIVERY_MODE) ? DELIVERY_CONTROL_OPTIONS : CARRYOUT_CONTROL_OPTIONS;
 
     const [updateOrder] = useMutation(UPDATE_ORDER_STATUS_MUTATION, {

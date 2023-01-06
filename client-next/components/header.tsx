@@ -3,7 +3,7 @@ import { useAppSelector } from '../redux/hooks';
 import clsx from "clsx"
 import styles from '../styles/components/Header.module.css'
 
-type Props = {
+interface Props {
   isKitchen: Boolean; 
 }
 

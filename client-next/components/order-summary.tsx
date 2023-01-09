@@ -15,6 +15,10 @@ interface Props {
   isReadOnly: boolean;
   /** Heading text */
   title: string;
+  /** Name provided on checkout */
+  name?: string;
+  /** Email address provided on checkout */
+  email?: string;
   /** Delivery mode */
   mode: string;
   /** List of pizzas to display info for */
@@ -30,6 +34,8 @@ interface Props {
 const OrderSummary = ({
   isReadOnly,
   title,
+  email,
+  name,
   mode,
   items,
   setCarryoutMode,
@@ -39,6 +45,16 @@ const OrderSummary = ({
   return (
     <div>
       <h2>{title}</h2>
+      {name && email && (
+        <>
+          <div>
+            <strong>Name:</strong> {name}
+          </div>
+          <div>
+            <strong>Email:</strong> {email}
+          </div>
+        </>
+      )}
       <div>
         <strong>Mode:</strong> {mode}
         {!isReadOnly &&

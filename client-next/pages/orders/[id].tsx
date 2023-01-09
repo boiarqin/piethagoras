@@ -11,6 +11,10 @@ const ORDER_QUERY = gql(`
         order(id: $id) {
             id,
             createdAt,
+            user {
+              email,
+              name,
+            },
             status,
             mode,
             pizzas {
@@ -43,6 +47,8 @@ const OrderDetail = ({ orderId }: Props) => {
   let items = [];
   let mode = "";
   let status = -1;
+  let email = "";
+  let name = "";
 
   const { data, loading } = useQuery(ORDER_QUERY, {
     variables: {
@@ -59,6 +65,8 @@ const OrderDetail = ({ orderId }: Props) => {
     }) || [];
   mode = data?.order.mode;
   status = data?.order.status; // set initial value
+  email = data?.order.user.email;
+  name = data?.order.user.name;
 
   const { data: statusData, loading: statusLoading } = useSubscription(
     STATUS_SUBSCRIPTION,

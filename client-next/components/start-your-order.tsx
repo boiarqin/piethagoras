@@ -13,7 +13,7 @@ const StartYourOrder = () => {
       <div className={startYourOrderStyles.interior}>
         <h2>🍕 Start Your Order</h2>
         <div className={startYourOrderStyles.options}>
-          <Link passHref href="/new-order">
+          <Link passHref href="/new-order?mode=delivery">
             <button
               className="primary"
               onClick={() => dispatch(setDeliveryMode())}
@@ -22,7 +22,7 @@ const StartYourOrder = () => {
             </button>
           </Link>
           <span>or</span>
-          <Link passHref href="/new-order">
+          <Link passHref href="/new-order?mode=carryout">
             <button
               className="primary"
               onClick={() => dispatch(setCarryoutMode())}

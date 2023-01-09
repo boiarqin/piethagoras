@@ -10,7 +10,7 @@ interface Props {
 const BackOfHouse = ({ children }: Props) => {
   return (
     <div className="container">
-      <GlobalHead />
+      <GlobalHead title="Back of House" />
 
       <Header isKitchen />
 

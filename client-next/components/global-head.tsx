@@ -1,9 +1,15 @@
 import Head from "next/head";
 
-const GlobalHead = () => {
+interface Props {
+  title?: string;
+}
+
+const GlobalHead = ({ title = "Order Now" }: Props) => {
+  const globalTitle = `Piethagoras Pizza | ${title}`;
+
   return (
     <Head>
-      <title>Piethagoras Pizza | Back of House</title>
+      <title>{globalTitle}</title>
       <link rel="icon" href="/favicon.ico" />
     </Head>
   );

@@ -12,7 +12,7 @@ interface Props {
 const PurchaseFunnel = ({ children }: Props) => {
   return (
     <div className="container">
-      <GlobalHead />
+      <GlobalHead title="Order Now" />
 
       <HeaderSimple />
 

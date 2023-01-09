@@ -14,7 +14,7 @@ interface Props {
 const BlogPost = ({ children }: Props) => {
   return (
     <div className="container">
-      <GlobalHead />
+      <GlobalHead title="Blog" />
 
       <Header />
 

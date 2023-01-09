@@ -1,4 +1,3 @@
-const WebSocket = require("ws");
 import { Provider } from "react-redux";
 import Modal from "react-modal";
 import {
@@ -18,17 +17,18 @@ const httpLink = createHttpLink({
   uri: "http://localhost:4000",
 });
 
-const wsLink = process.browser
-  ? new WebSocketLink({
-      uri: `ws://localhost:4000/graphql`,
-      options: {
-        reconnect: true,
-        // connectionParams: {
-        //   authToken: localStorage.getItem(AUTH_TOKEN)
-        // }
-      },
-    })
-  : null;
+const wsLink =
+  typeof window !== "undefined"
+    ? new WebSocketLink({
+        uri: `ws://localhost:4000/graphql`,
+        options: {
+          reconnect: true,
+          // connectionParams: {
+          //   authToken: localStorage.getItem(AUTH_TOKEN)
+          // }
+        },
+      })
+    : null;
 
 // The split function takes three parameters:
 
@@ -36,7 +36,7 @@ const wsLink = process.browser
 // * The Link to use for an operation if the function returns a "truthy" value
 // * The Link to use for an operation if the function returns a "falsy" value
 const splitLink =
-  process.browser && wsLink != null
+  typeof window !== "undefined" && wsLink != null
     ? split(
         ({ query }) => {
           const definition = getMainDefinition(query);

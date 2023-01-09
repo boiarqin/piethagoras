@@ -68,6 +68,7 @@ type Order {
   pizzasCount: Int
   pizzas: [Pizza!]!
   status: Int
+  user: User
 }
 
 type Pizza {

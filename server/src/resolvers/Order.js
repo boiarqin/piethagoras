@@ -10,9 +10,19 @@ const pizzas = (parent, args, context) => {
 };
 
 const pizzasCount = async (parent, args, context) => {
-  const count = await context.prisma.pizza.count({where: {orderId: parent.id}});
+  const count = await context.prisma.pizza.count({
+    where: { orderId: parent.id },
+  });
 
   return count;
+};
+
+const user = async (parent, args, context) => {
+  const orderUser = await context.prisma.user.findUnique({
+    where: { id: parent.userId },
+  });
+
+  return orderUser;
 };
 
 module.exports = {
@@ -21,4 +31,5 @@ module.exports = {
   mode,
   pizzas,
   pizzasCount,
+  user,
 };

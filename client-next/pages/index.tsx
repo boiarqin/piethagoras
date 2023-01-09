@@ -1,7 +1,7 @@
 import { GetServerSideProps } from "next";
-import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
+import GlobalHead from "../components/global-head";
 import ContactHours from "../components/contact-hours";
 import Careers from "../components/careers";
 import Footer from "../components/footer";
@@ -18,10 +18,7 @@ interface Props {
 export default function Home({ allPostsData }: Props) {
   return (
     <div className="container">
-      <Head>
-        <title>Piethagoras Pizza | Order Online</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <GlobalHead />
 
       <Header />
 

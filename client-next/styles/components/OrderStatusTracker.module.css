@@ -16,12 +16,12 @@
   align-items: center;
   justify-content: space-around;
   height: 100%;
-  border-right: 1px solid #618222;
+  border-right: 1px solid #4b651a;
   font-size: 0.5rem;
   text-transform: uppercase;
 }
 .order-status-tracker .status-options .option:first-child {
-  border-left: 1px solid #618222;
+  border-left: 1px solid #4b651a;
 }
 
 .order-status-tracker .progress-bar {
@@ -49,7 +49,7 @@
       transparent 66%
     ),
     -webkit-linear-gradient(top, rgba(255, 255, 255, 0.25), rgba(0, 0, 0, 0.25)),
-    -webkit-linear-gradient(left, #7ea92c, #618222);
+    -webkit-linear-gradient(left, #5d7e20, #4b651a);
 
   border-radius: 5rem;
   background-size: 10rem 5rem, 100% 100%, 100% 100%;

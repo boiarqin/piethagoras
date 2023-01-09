@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import Head from "next/head";
+import GlobalHead from "../components/global-head";
 import Footer from "../components/footer";
 import Header from "../components/header";
 
@@ -10,10 +10,7 @@ interface Props {
 const BackOfHouse = ({ children }: Props) => {
   return (
     <div className="container">
-      <Head>
-        <title>Piethagoras Pizza | Back of House</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <GlobalHead />
 
       <Header isKitchen />
 

@@ -70,8 +70,8 @@ body {
 
 button.primary {
   padding: 0.5rem 1rem;
-  background-color: #7ea92c;
-  border-color: #618222;
+  background-color: #5d7e20;
+  border-color: #4b651a;
   color: white;
   text-transform: uppercase;
   border-radius: 8px;
@@ -91,7 +91,7 @@ button.text {
   background-color: transparent;
   border-width: 0;
   border-color: none;
-  color: #7ea92c;
+  color: #5d7e20;
   text-decoration: underline;
   text-transform: none;
   border-radius: 8px;

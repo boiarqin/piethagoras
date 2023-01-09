@@ -1,5 +1,6 @@
 import Head from "next/head";
 import type { ReactNode } from "react";
+import GlobalHead from "../components/global-head";
 import Footer from "../components/footer";
 import HeaderSimple from "../components/header-simple";
 import ContactHours from "../components/contact-hours";
@@ -11,10 +12,7 @@ interface Props {
 const PurchaseFunnel = ({ children }: Props) => {
   return (
     <div className="container">
-      <Head>
-        <title>Piethagoras Pizza | Order Online</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <GlobalHead />
 
       <HeaderSimple />
 

@@ -91,6 +91,8 @@ const OrderDetail = ({ orderId }: Props) => {
           <OrderSummary
             isReadOnly
             title="Order Details"
+            name={name}
+            email={email}
             mode={mode}
             items={items}
           />

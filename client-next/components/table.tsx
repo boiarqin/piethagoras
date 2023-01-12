@@ -17,6 +17,8 @@ interface Props {
   index: string;
   /** Displayed text on action button */
   actionText?: string;
+  /** Function that generates more descriptive text for action button */
+  actionTextFn?: Function;
   /** URL to navigate to when clicking action button */
   actionPath?: String;
 }
@@ -26,6 +28,7 @@ const Table = ({
   rows,
   index = "id",
   actionText,
+  actionTextFn,
   actionPath,
 }: Props) => {
   return (
@@ -49,7 +52,9 @@ const Table = ({
               {cells}
               <td>
                 <Link passHref href={`/${actionPath}/${row[index]}`}>
-                  <button className="primary">{actionText}</button>
+                  <button className="primary" aria-label={actionTextFn(row)}>
+                    {actionText}
+                  </button>
                 </Link>
               </td>
             </tr>

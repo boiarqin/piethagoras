@@ -87,6 +87,7 @@ const Kitchen = () => {
             rows={orders}
             index="id"
             actionText="View Details"
+            actionTextFn={(row) => `View Details for Order ${row.id}`}
             actionPath="orders"
           />
         </div>
@@ -103,6 +104,9 @@ const Kitchen = () => {
               rows={employeesData}
               index="id"
               actionText="Manage Schedule"
+              actionTextFn={(row) =>
+                `Manage Schedule for ${row.firstName} ${row.lastName}`
+              }
               actionPath="employees"
             />
           )}
@@ -119,7 +123,8 @@ const Kitchen = () => {
               columns={inventoryColumns}
               rows={inventoryData}
               index="id"
-              actionText="Order Items"
+              actionText="Manage Inventory"
+              actionTextFn={(row) => `Manage Inventory for ${row.itemName}`}
               actionPath="inventory"
             />
           )}

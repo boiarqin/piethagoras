@@ -38,7 +38,7 @@ const BYOCategory = ({ categoryName, categoryOptions }) => {
 const Post = () => {
   return (
     <BlogPost>
-      <h1>Our Menu</h1>
+      <h1 id="main-heading">Our Menu</h1>
       <p>
         <em>Choose from one of our favorites or build your own!</em>
       </p>

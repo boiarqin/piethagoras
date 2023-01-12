@@ -22,14 +22,14 @@ export default function Home({ allPostsData }: Props) {
 
       <Header />
 
-      <main className="main">
+      <main id="main" className="main" aria-labelledby="main-heading">
         <section
           className={`${sectionStyles.section} ${sectionStyles.fiftyFifty} ${sectionStyles["section-mozz"]}`}
         >
           <div className={sectionStyles.interior}>
             <div className={sectionStyles.wrapper}>
               <div className={sectionStyles.left}>
-                <h1 className={styles.title}>
+                <h1 id="main-heading" className={styles.title}>
                   Welcome to Piethagoras Pizza Shop!
                 </h1>
                 <p>

@@ -16,7 +16,7 @@ const PurchaseFunnel = ({ children }: Props) => {
 
       <HeaderSimple />
 
-      <main id="main" className="main">
+      <main id="main" className="main" aria-labelledby="main-heading">
         {children}
       </main>
 

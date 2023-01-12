@@ -18,7 +18,7 @@ const BlogPost = ({ children }: Props) => {
 
       <Header />
 
-      <main id="main" className="main">
+      <main id="main" className="main" aria-labelledby="main-heading">
         <article className={styles["blog-post"]}>
           <div className={styles.interior}>{children}</div>
         </article>

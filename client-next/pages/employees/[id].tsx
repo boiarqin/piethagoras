@@ -26,7 +26,7 @@ const EmployeeDetail = ({ employeeId }: Props) => {
 
       {employeesData && (
         <>
-          <h1>
+          <h1 id="main-heading">
             Employee Detail: {firstName} {lastName}
           </h1>
           <section className={`${sectionStyles.section}`}>

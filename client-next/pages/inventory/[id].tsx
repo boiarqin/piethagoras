@@ -25,7 +25,7 @@ const InventoryItemDetail = ({ itemId }: Props) => {
       )}
       {itemData && (
         <>
-          <h1>Item Detail: {itemName}</h1>
+          <h1 id="main-heading">Item Detail: {itemName}</h1>
           <section className={`${sectionStyles.section}`}>
             <div className={sectionStyles.interior}>
               <p>

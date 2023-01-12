@@ -14,7 +14,7 @@ const BackOfHouse = ({ children }: Props) => {
 
       <Header isKitchen />
 
-      <main id="main" className="main">
+      <main id="main" className="main" aria-labelledby="main-heading">
         {children}
       </main>
 

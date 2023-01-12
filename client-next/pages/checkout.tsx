@@ -114,7 +114,7 @@ const Checkout = () => {
 
   return (
     <PurchaseFunnel>
-      <h1>Checkout</h1>
+      <h1 id="main-heading">Checkout</h1>
       <div className={styles["menu-cart-container"]}>
         <div className={styles.cart}>
           <OrderSummary

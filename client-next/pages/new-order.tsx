@@ -47,7 +47,7 @@ const NewOrder = () => {
 
   return (
     <PurchaseFunnel>
-      <h1>Order Now</h1>
+      <h1 id="main-heading">Order Now</h1>
       <div className={styles["menu-cart-container"]}>
         <div className={styles.cart}>
           <OrderSummary

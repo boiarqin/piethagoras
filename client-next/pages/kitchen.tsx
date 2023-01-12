@@ -78,7 +78,7 @@ const Kitchen = () => {
 
   return (
     <BackOfHouse>
-      <h1>Kitchen Operations Dashboard</h1>
+      <h1 id="main-heading">Kitchen Operations Dashboard</h1>
       <section className={`${sectionStyles.section}`}>
         <div className={sectionStyles.interior}>
           <h2>Orders</h2>

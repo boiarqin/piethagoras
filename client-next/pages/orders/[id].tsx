@@ -85,7 +85,7 @@ const OrderDetail = ({ orderId }: Props) => {
       {/* {itemError  && <>Error: {itemError.message}</>} */}
       {data && (
         <>
-          <h1>Order Detail: {data?.order.id}</h1>
+          <h1 id="main-heading">Order Detail: {data?.order.id}</h1>
           {status > -1 && <OrderStatusTracker status={status} mode={mode} />}
           <PizzaControlPanel orderId={orderId} status={status} mode={mode} />
           <OrderSummary

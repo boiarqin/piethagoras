@@ -80,7 +80,7 @@ const Confirmation = ({ orderId }: Props) => {
 
   return (
     <PurchaseFunnel>
-      <h1>Thank you for your order!</h1>
+      <h1 id="main-heading">Thank you for your order!</h1>
       {status > -1 && <OrderStatusTracker status={status} mode={mode} />}
       <OrderSummary
         isReadOnly

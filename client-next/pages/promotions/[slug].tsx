@@ -11,7 +11,7 @@ const Post = ({ postData }: Props) => {
 
   return (
     <BlogPost>
-      <h1>{title}</h1>
+      <h1 id="main-heading">{title}</h1>
       <div dangerouslySetInnerHTML={{ __html: content }} />
     </BlogPost>
   );

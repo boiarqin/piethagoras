@@ -19,7 +19,7 @@ const Header = ({ isKitchen = false }: Props) => {
       <Link href="#footer" className="screenreader-only skip-link">
         Skip to footer
       </Link>
-      <nav>
+      <nav aria-label="Main Navigation">
         <ul>
           <li>
             <Link href="/">

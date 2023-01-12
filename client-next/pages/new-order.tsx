@@ -49,7 +49,7 @@ const NewOrder = () => {
     <PurchaseFunnel>
       <h1 id="main-heading">Order Now</h1>
       <div className={styles["menu-cart-container"]}>
-        <div className={styles.cart}>
+        <aside className={styles.cart} aria-labelledby="order-summary-title">
           <OrderSummary
             isReadOnly={false}
             title="Your Items"
@@ -64,9 +64,9 @@ const NewOrder = () => {
               Go To Checkout
             </button>
           </Link>
-        </div>
+        </aside>
 
-        <div className={styles.menu}>
+        <section className={styles.menu} aria-label="Add Items From Menu">
           <h2>Menu</h2>
           <p>
             <em>Choose from one of our favorites or build your own!</em>
@@ -100,7 +100,7 @@ const NewOrder = () => {
               </button>
             </li>
           </ul>
-        </div>
+        </section>
       </div>
       {isFavoritesModalOpen && (
         <AddFavoritesModal

@@ -44,7 +44,7 @@ const OrderSummary = ({
 }: Props) => {
   return (
     <div>
-      <h2>{title}</h2>
+      <h2 id="order-summary-title">{title}</h2>
       {name && email && (
         <>
           <div>

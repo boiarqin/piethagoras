@@ -5,6 +5,7 @@ const ContactHours = () => {
   return (
     <section
       className={`${styles.section} ${styles.fiftyFifty} ${styles["section-dough"]}`}
+      aria-label="Contact Information and Hours"
     >
       <div className={styles.interior}>
         <div className={styles.wrapper}>

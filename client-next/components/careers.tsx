@@ -5,6 +5,8 @@ const Careers = () => {
   return (
     <section
       className={`${styles.section} ${styles.fiftyFifty} ${styles["section-mozz"]}`}
+      role="region"
+      aria-label="Careers"
     >
       <div className={styles.interior}>
         <div className={styles.wrapper}>
@@ -17,7 +19,7 @@ const Careers = () => {
             />
           </div>
           <div className={styles.right}>
-            <h2>🧑‍🍳 We're Hiring!</h2>
+            <h2>We're Hiring!</h2>
             <p>
               Reprehenderit elit chicken wing, stuffed tempor sauteed onions
               Chicago style parmesan ut. Pork sausage veniam hawaiian sed burnt

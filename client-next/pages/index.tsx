@@ -22,14 +22,15 @@ export default function Home({ allPostsData }: Props) {
 
       <Header />
 
-      <main id="main" className="main" aria-labelledby="main-heading">
+      <main id="main" className="main">
         <section
           className={`${sectionStyles.section} ${sectionStyles.fiftyFifty} ${sectionStyles["section-mozz"]}`}
+          aria-label="Welcome"
         >
           <div className={sectionStyles.interior}>
             <div className={sectionStyles.wrapper}>
               <div className={sectionStyles.left}>
-                <h1 id="main-heading" className={styles.title}>
+                <h1 className={styles.title}>
                   Welcome to Piethagoras Pizza Shop!
                 </h1>
                 <p>
@@ -60,6 +61,7 @@ export default function Home({ allPostsData }: Props) {
 
         <section
           className={`${sectionStyles.section} ${styles.promos} ${sectionStyles["section-dough"]}`}
+          aria-label="News and Promotions"
         >
           <div className={sectionStyles.interior}>
             <h2>📰 News and Promotions</h2>
@@ -90,6 +92,7 @@ export default function Home({ allPostsData }: Props) {
 
         <section
           className={`${sectionStyles.section} ${sectionStyles["section-crust"]}`}
+          aria-label="Our Story"
         >
           <div className={sectionStyles.interior}>
             <h2>📜 Our Story</h2>

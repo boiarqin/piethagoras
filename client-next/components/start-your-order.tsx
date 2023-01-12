@@ -9,6 +9,7 @@ const StartYourOrder = () => {
   return (
     <section
       className={`${sectionStyles.section} ${startYourOrderStyles["start-your-order"]} ${sectionStyles["section-crust"]}`}
+      aria-label="Start Your Order"
     >
       <div className={startYourOrderStyles.interior}>
         <h2>🍕 Start Your Order</h2>

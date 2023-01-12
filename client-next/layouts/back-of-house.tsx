@@ -14,7 +14,9 @@ const BackOfHouse = ({ children }: Props) => {
 
       <Header isKitchen />
 
-      <main className="main">{children}</main>
+      <main id="main" className="main">
+        {children}
+      </main>
 
       <Footer />
     </div>

@@ -13,6 +13,12 @@ const Header = ({ isKitchen = false }: Props) => {
 
   return (
     <header className={clsx(styles.header, { [styles.kitchen]: isKitchen })}>
+      <Link href="#main" className="screenreader-only skip-link">
+        Skip to main content
+      </Link>
+      <Link href="#footer" className="screenreader-only skip-link">
+        Skip to footer
+      </Link>
       <nav>
         <ul>
           <li>

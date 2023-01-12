@@ -49,6 +49,24 @@ body {
   box-sizing: border-box;
 }
 
+.screenreader-only {
+  position: absolute;
+  display: inline-block;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0px, 0px, 0px, 0px);
+}
+.screenreader-only:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0px;
+  overflow: visible;
+  clip: auto;
+}
+
 .container {
   min-height: 100vh;
   margin: 0;

@@ -16,7 +16,9 @@ const PurchaseFunnel = ({ children }: Props) => {
 
       <HeaderSimple />
 
-      <main className="main">{children}</main>
+      <main id="main" className="main">
+        {children}
+      </main>
 
       <ContactHours />
 

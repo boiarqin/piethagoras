@@ -18,7 +18,7 @@ const BlogPost = ({ children }: Props) => {
 
       <Header />
 
-      <main className="main">
+      <main id="main" className="main">
         <article className={styles["blog-post"]}>
           <div className={styles.interior}>{children}</div>
         </article>

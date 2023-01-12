@@ -69,8 +69,13 @@ const OrderSummary = ({
           ))}
       </div>
       <div>
+        <div role="alert" aria-live="polite">
+          {items.length === 0
+            ? "No items in your cart"
+            : `${items.length} items in your cart`}
+        </div>
         {items.length === 0 ? (
-          <span>No items in your cart -- Add some 'za!</span>
+          <div>Add some 'za!</div>
         ) : (
           <ul className={styles.items}>
             {items.map((item) => {
@@ -94,6 +99,7 @@ const OrderSummary = ({
                       <button
                         className="text"
                         onClick={() => removeItemFromCart(id)}
+                        aria-label={`Remove ${displayName} from cart`}
                       >
                         (remove)
                       </button>
